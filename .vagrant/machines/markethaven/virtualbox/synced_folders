@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/code":{"type":null,"mount_options":["uid=1000","gid=1000","_netdev"],"guestpath":"/home/vagrant/code","hostpath":"D:/Homestead Projects/MarketHaven","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/Homestead Projects/MarketHaven","disabled":false,"__vagrantfile":true}}}
