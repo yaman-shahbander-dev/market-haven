@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 use Shared\Enums\MorphEnum;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,5 +39,12 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
+
+        Passport::tokensCan([
+            'admin' => 'Admin can access the dashboard',
+            'user' => 'user can access the web app',
+        ]);
+
+        Passport::setDefaultScope('user');
     }
 }
