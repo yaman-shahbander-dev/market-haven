@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'type' => UserTypes::USER->value,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => 'password', // password
             'banned_at' => null,
             'remember_token' => Str::random(10),
         ];
