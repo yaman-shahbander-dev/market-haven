@@ -22,7 +22,7 @@ return new class () extends Migration {
             $table->string('type')->default(UserTypes::USER->value);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->timestamp('banned_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

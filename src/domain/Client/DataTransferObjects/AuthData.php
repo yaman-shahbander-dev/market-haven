@@ -13,13 +13,14 @@ class AuthData extends BaseData
 {
     public function __construct(
         public string $email,
-        public string $password,
+        public ?string $password,
         public ?string $name,
         public ?string $firstName,
         public ?string $lastName,
         public ?string $gender,
-        public ?string $scope = UserScopes::USER->value,
-        public ?string $type = UserTypes::USER->value,
+        public ?string $login,
+        public readonly ?string $scope = UserScopes::USER->value,
+        public readonly ?string $type = UserTypes::USER->value,
     ) {
     }
 }

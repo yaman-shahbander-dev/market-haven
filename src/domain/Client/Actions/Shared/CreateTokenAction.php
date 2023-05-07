@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Client\Actions\Admin;
+namespace Domain\Client\Actions\Shared;
 
 use Domain\Client\DataTransferObjects\AdminData;
 use Domain\Client\DataTransferObjects\UserData;

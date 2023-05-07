@@ -20,7 +20,11 @@ class RegisterUserAction
 
     public function handle(AuthData $authData): UserData|null
     {
-        $user = QueryBuilder::for($this->user)->create($authData->toArray());
+        if ($authData->name === null) {
+            $authData->name = $authData->login;
+        }
+
+        $user = QueryBuilder::for($this->user)->create($authData->except('login')->toArray());
 
         if ($user === null) {
             return null;

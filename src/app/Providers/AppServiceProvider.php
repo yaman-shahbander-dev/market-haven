@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Domain\Client\Managers\IManagers\IProviderManager;
+use Domain\Client\Managers\Managers\ProviderManager;
+use Domain\Client\Services\IServices\IProviderService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -15,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(IProviderManager::class, ProviderManager::class);
     }
 
     /**

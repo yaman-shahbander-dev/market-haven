@@ -6,10 +6,10 @@ use App\Admin\v1\Http\Client\Requests\LoginRequest;
 use App\Admin\v1\Http\Client\Resources\AdminResource;
 use App\Http\Controllers\Controller;
 use Domain\Client\Actions\Admin\LoginAction;
-use Domain\Client\Actions\Admin\RevokeTokenAction;
+use Domain\Client\Actions\Shared\RevokeTokenAction;
 use Domain\Client\DataTransferObjects\AuthData;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
