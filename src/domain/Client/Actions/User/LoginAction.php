@@ -3,7 +3,7 @@
 namespace Domain\Client\Actions\User;
 
 use App\Exceptions\Client\UserNotFoundException;
-use Domain\Client\Actions\Admin\CreateTokenAction;
+use Domain\Client\Actions\Shared\CreateTokenAction;
 use Domain\Client\DataTransferObjects\AuthData;
 use Domain\Client\DataTransferObjects\UserData;
 use Domain\Client\Models\User;
