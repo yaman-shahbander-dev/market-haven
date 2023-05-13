@@ -1,0 +1,14 @@
+{
+    "message": "OK",
+    "data": {
+        "id": "b3ee2aca-26a5-3ffd-b4cd-9d8e242f712a",
+        "type": "categories",
+        "attributes": {
+            "name": "Bennie Kulas",
+            "main_category_id": null,
+            "created_at": "2023-05-11T15:39:17.000000Z",
+            "updated_at": "2023-05-11T15:39:17.000000Z",
+            "deleted_at": null
+        }
+    }
+}

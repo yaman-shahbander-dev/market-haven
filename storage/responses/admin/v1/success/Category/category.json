@@ -1,0 +1,14 @@
+{
+    "message": "OK",
+    "data": {
+        "id": "5d8ecc22-0360-3f6f-ab4d-2d5d53beb9f9",
+        "type": "categories",
+        "attributes": {
+            "name": "Zakary Nienow",
+            "main_category_id": null,
+            "created_at": "2023-05-11T15:39:17.000000Z",
+            "updated_at": "2023-05-11T15:39:17.000000Z",
+            "deleted_at": null
+        }
+    }
+}

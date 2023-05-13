@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Category\CategorySeeder;
 use Database\Seeders\Client\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // production seeders.
         $this->call([
             UserSeeder::class,
+            CategorySeeder::class
         ]);
 
 

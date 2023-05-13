@@ -12,7 +12,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/aa', function () {
+    Bugsnag::registerCallback(function ($report) {
+        $report->setUser([
+            'id' => '123456',
+            'name' => 'Leeroy Jenkins',
+            'email' => 'leeeeroy@jenkins.com',
+        ]);
+    });
+    return 'here';
 });
