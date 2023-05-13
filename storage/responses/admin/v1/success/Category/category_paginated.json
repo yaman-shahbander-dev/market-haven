@@ -1,0 +1,117 @@
+{
+    "message": "OK",
+    "data": {
+        "collection": [
+            {
+                "id": "5d8ecc22-0360-3f6f-ab4d-2d5d53beb9f9",
+                "name": "Zakary Nienow",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "7642d5b7-adcb-33fe-bfd1-adda2441c89a",
+                "name": "Elizabeth Durgan II",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "7d95c25c-6bcd-38b1-abe9-5dc9fe308646",
+                "name": "Darby Rau",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "8cafc881-5fb7-3fd3-ab30-bd2815055d68",
+                "name": "Leta Johnston",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "96a52c0f-046b-3259-930a-51214c263407",
+                "name": "Mr. Parker Windler DDS",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "a4fbf3c2-5c41-3a43-b00a-a32da5d3a41f",
+                "name": "Reba Smitham",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "b3ee2aca-26a5-3ffd-b4cd-9d8e242f712a",
+                "name": "Bennie Kulas",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "dce55285-ec7a-334d-9c47-da8d28a1c138",
+                "name": "Ellie Metz Sr.",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "dd4106d2-22db-3664-8821-5dae8ba074b5",
+                "name": "Miss Oma Dickinson DVM",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            },
+            {
+                "id": "de51876e-d279-39f7-8c4e-95c1e5fbab0e",
+                "name": "Rodrigo Kozey",
+                "main_category_id": null,
+                "created_at": "2023-05-11T15:39:17+00:00",
+                "updated_at": "2023-05-11T15:39:17+00:00",
+                "deleted_at": null
+            }
+        ],
+        "meta": {
+            "current_page": 1,
+            "first_page_url": "http://markethaven.test:8000/admin/v1/category/category?page%5Bnumber%5D=1",
+            "from": 1,
+            "last_page": 1,
+            "last_page_url": "http://markethaven.test:8000/admin/v1/category/category?page%5Bnumber%5D=1",
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "active": false
+                },
+                {
+                    "url": "http://markethaven.test:8000/admin/v1/category/category?page%5Bnumber%5D=1",
+                    "label": "1",
+                    "active": true
+                },
+                {
+                    "url": null,
+                    "label": "Next &raquo;",
+                    "active": false
+                }
+            ],
+            "next_page_url": null,
+            "path": "http://markethaven.test:8000/admin/v1/category/category",
+            "per_page": 15,
+            "prev_page_url": null,
+            "to": 10,
+            "total": 10
+        }
+    }
+}
