@@ -4,13 +4,14 @@ namespace Domain\Client\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\Client\UserFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Domain\Client\QueryBuilders\UserQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Shared\Traits\Uuid;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,7 @@ class User extends Authenticatable
     use Notifiable;
     use Uuid;
     use SoftDeletes;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -56,15 +58,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function newEloquentBuilder($query): UserQueryBuilder
+    {
+        return new UserQueryBuilder($query);
+    }
+
     protected static function newFactory()
     {
         return UserFactory::new();
-    }
-
-    public function type(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => strtolower($value)
-        );
     }
 }

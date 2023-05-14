@@ -23,6 +23,7 @@ class CreateCategoryRequest extends FormRequest
                 Rule::unique('categories', 'name')
             ],
             'main_category_id' => [
+                'nullable',
                 'uuid',
                 Rule::exists('categories', 'id')
                     ->whereNull('main_category_id')

@@ -36,20 +36,28 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('api')->prefix(config('route-prefix.admin.v1.prefix', 'admin/v1'))
                 ->group(function () {
-                    Route::prefix(config('route-prefix.admin.v1.client', 'client'))
-                        ->group(base_path('routes/admin/v1/client.php'));
+                    Route::middleware('api')->group(function () {
+                        Route::prefix(config('route-prefix.admin.v1.client', 'client'))
+                            ->group(base_path('routes/admin/v1/client.php'));
+                    });
 
-                    Route::prefix(config('route-prefix.admin.v1.category', 'category'))
-                        ->group(base_path('routes/admin/v1/category.php'));
+                    Route::middleware('auth:api')->group(function () {
+                        Route::prefix(config('route-prefix.admin.v1.category', 'category'))
+                            ->group(base_path('routes/admin/v1/category.php'));
+                    });
             });
 
-            Route::middleware('api')->prefix(config('route-prefix.user.v1.prefix', 'user/v1'))
+            Route::prefix(config('route-prefix.user.v1.prefix', 'user/v1'))
                 ->group(function () {
-                    Route::prefix(config('route-prefix.user.v1.client', 'client'))
-                        ->group(base_path('routes/user/v1/client.php'));
+                    Route::middleware('api')->group(function () {
+                        Route::prefix(config('route-prefix.user.v1.client', 'client'))
+                            ->group(base_path('routes/user/v1/client.php'));
+                    });
 
-                    Route::prefix(config('route-prefix.user.v1.category', 'category'))
-                        ->group(base_path('routes/user/v1/category.php'));
+                    Route::middleware('auth:api')->group(function () {
+                        Route::prefix(config('route-prefix.user.v1.category', 'category'))
+                            ->group(base_path('routes/user/v1/category.php'));
+                    });
             });
         });
     }
