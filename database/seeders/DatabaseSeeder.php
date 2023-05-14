@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Seeders\Category\CategorySeeder;
+use Database\Seeders\Client\AdminPermissionSeeder;
+use Database\Seeders\Client\PermissionSeeder;
+use Database\Seeders\Client\RolePermissionSeeder;
+use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -25,7 +29,11 @@ class DatabaseSeeder extends Seeder
         // production seeders.
         $this->call([
             UserSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            PermissionSeeder::class,
+            RolePermissionSeeder::class,
+            AdminPermissionSeeder::class,
+            UserPermissionSeeder::class,
         ]);
 
 

@@ -12,12 +12,15 @@ use Domain\Category\Actions\GetCategoriesAction;
 use Domain\Category\Actions\ShowCategoryAction;
 use Domain\Category\Actions\UpdateCategoryAction;
 use Domain\Category\DataTransferObjects\CategoryData;
+use Domain\Category\Models\Category;
 use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
     public function index(): JsonResponse
     {
+        $this->authorize('view', new Category());
+
         $categories = GetCategoriesAction::run();
 
         return $categories
@@ -27,6 +30,8 @@ class CategoryController extends Controller
 
     public function show(string $category): JsonResponse
     {
+        $this->authorize('view', new Category());
+
         $category = ShowCategoryAction::run($category);
 
         return $category
@@ -36,6 +41,8 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request): JsonResponse
     {
+        $this->authorize('create', Category::class);
+
         $category = CreateCategoryAction::run(CategoryData::from($request->all()));
 
         return $category
@@ -43,8 +50,10 @@ class CategoryController extends Controller
             : $this->failedResponse();
     }
 
-    public function update(UpdateCategoryRequest $request): JsonResponse
+    public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
     {
+        $this->authorize('update', $category);
+
         $result = UpdateCategoryAction::run(CategoryData::from($request->all()));
 
         return $result
@@ -52,9 +61,11 @@ class CategoryController extends Controller
             : $this->failedResponse();
     }
 
-    public function destroy(string $category): JsonResponse
+    public function destroy(Category $category): JsonResponse
     {
-        $result = DeleteCategoryAction::run($category);
+        $this->authorize('delete', $category);
+
+        $result = DeleteCategoryAction::run($category->id);
 
         return $result
             ? $this->okResponse()

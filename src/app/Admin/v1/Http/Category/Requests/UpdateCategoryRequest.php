@@ -10,7 +10,7 @@ class UpdateCategoryRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-           'id' => $this->route('category')
+           'id' => $this->route('category')?->id
         ]);
     }
 
@@ -30,6 +30,7 @@ class UpdateCategoryRequest extends FormRequest
                 Rule::unique('categories', 'name')->ignore($this->route('category'))
             ],
             'main_category_id' => [
+                'nullable',
                 'uuid',
                 Rule::exists('categories', 'id')
                     ->whereNull('main_category_id')

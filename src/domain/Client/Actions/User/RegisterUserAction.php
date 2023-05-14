@@ -4,8 +4,6 @@ namespace Domain\Client\Actions\User;
 
 use Domain\Client\DataTransferObjects\AuthData;
 use Domain\Client\DataTransferObjects\UserData;
-use Domain\Client\Enums\UserScopes;
-use Domain\Client\Enums\UserTypes;
 use Domain\Client\Models\User;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -30,6 +28,10 @@ class RegisterUserAction
             return null;
         }
 
-        return LoginAction::run($authData, $user);
+        if (AssignPermissionsToUserAction::run($user)) {
+            return LoginAction::run($authData, $user);
+        }
+
+        return null;
     }
 }
