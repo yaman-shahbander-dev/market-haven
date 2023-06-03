@@ -6,6 +6,7 @@ return [
             'prefix' => 'admin/v1',
             'client' => 'client',
             'category' => 'category',
+            'brand' => 'brand',
         ],
     ],
     'user' => [
@@ -13,6 +14,7 @@ return [
             'prefix' => 'user/v1',
             'client' => 'client',
             'category' => 'category',
+            'brand' => 'brand',
         ],
     ],
 ];

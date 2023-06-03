@@ -17,4 +17,9 @@ enum PermissionEnum: string
     case CATEGORY_CREATE = 'category.create.*';
     case CATEGORY_UPDATE = 'category.update.*';
     case CATEGORY_DELETE = 'category.delete.*';
+
+    case BRAND_VIEW_ANY = 'brand.view.*';
+    case BRAND_CREATE = 'brand.create.*';
+    case BRAND_UPDATE = 'brand.update.*';
+    case BRAND_DELETE = 'brand.delete.*';
 }
