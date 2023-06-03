@@ -22,13 +22,18 @@ enum RoleEnum: string
                 PermissionEnum::CATEGORY_CREATE->value,
                 PermissionEnum::CATEGORY_UPDATE->value,
                 PermissionEnum::CATEGORY_DELETE->value,
+                PermissionEnum::BRAND_VIEW_ANY->value,
+                PermissionEnum::BRAND_CREATE->value,
+                PermissionEnum::BRAND_UPDATE->value,
+                PermissionEnum::BRAND_DELETE->value,
             ],
             self::USER->value => [
                 PermissionEnum::USER_VIEW_ANY->value,
                 PermissionEnum::USER_CREATE->value,
                 PermissionEnum::USER_UPDATE->value,
                 PermissionEnum::USER_DELETE->value,
-                PermissionEnum::CATEGORY_VIEW_ANY,
+                PermissionEnum::CATEGORY_VIEW_ANY->value,
+                PermissionEnum::BRAND_VIEW_ANY->value,
             ]
         ];
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Brand\BrandSeeder;
 use Database\Seeders\Category\CategorySeeder;
 use Database\Seeders\Client\AdminPermissionSeeder;
 use Database\Seeders\Client\PermissionSeeder;
@@ -10,6 +11,7 @@ use Database\Seeders\Client\RolePermissionSeeder;
 use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,16 +29,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // production seeders.
-        $this->call([
+        $seeders = [
             UserSeeder::class,
             CategorySeeder::class,
             PermissionSeeder::class,
             RolePermissionSeeder::class,
             AdminPermissionSeeder::class,
             UserPermissionSeeder::class,
-        ]);
-
-
+            BrandSeeder::class,
+        ];
 
         /*
         |--------------------------------------------------------------------------
@@ -48,9 +49,9 @@ class DatabaseSeeder extends Seeder
         |
         */
         if (app()->environment(['local', 'staging', 'testing'])) {
-//            Schema::disableForeignKeyConstraints();
-            $this->call(TestingSeeder::class);
-//            Schema::enableForeignKeyConstraints();
+            Schema::disableForeignKeyConstraints();
+            $this->call($seeders);
+            Schema::enableForeignKeyConstraints();
         }
     }
 }

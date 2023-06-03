@@ -44,6 +44,9 @@ class RouteServiceProvider extends ServiceProvider
                     Route::middleware('auth:api')->group(function () {
                         Route::prefix(config('route-prefix.admin.v1.category', 'category'))
                             ->group(base_path('routes/admin/v1/category.php'));
+
+                        Route::prefix(config('route-prefix.admin.v1.brand', 'brand'))
+                            ->group(base_path('routes/admin/v1/brand.php'));
                     });
             });
 
@@ -57,6 +60,9 @@ class RouteServiceProvider extends ServiceProvider
                     Route::middleware('auth:api')->group(function () {
                         Route::prefix(config('route-prefix.user.v1.category', 'category'))
                             ->group(base_path('routes/user/v1/category.php'));
+
+                        Route::prefix(config('route-prefix.user.v1.brand', 'brand'))
+                            ->group(base_path('routes/user/v1/brand.php'));
                     });
             });
         });
