@@ -22,4 +22,9 @@ enum PermissionEnum: string
     case BRAND_CREATE = 'brand.create.*';
     case BRAND_UPDATE = 'brand.update.*';
     case BRAND_DELETE = 'brand.delete.*';
+
+    case PRODUCT_VIEW_ANY = 'product.view.*';
+    case PRODUCT_CREATE = 'product.create.*';
+    case PRODUCT_UPDATE = 'product.update.*';
+    case PRODUCT_DELETE = 'product.delete.*';
 }

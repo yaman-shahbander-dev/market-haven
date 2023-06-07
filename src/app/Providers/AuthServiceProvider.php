@@ -7,6 +7,8 @@ use Domain\Brand\Models\Brand;
 use Domain\Brand\Policies\BrandPolicy;
 use Domain\Category\Models\Category;
 use Domain\Category\Policies\CategoryPolicy;
+use Domain\Product\Models\Product;
+use Domain\Product\Policies\ProductPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Category::class => CategoryPolicy::class,
         Brand::class => BrandPolicy::class,
+        Product::class => ProductPolicy::class,
     ];
 
     /**
