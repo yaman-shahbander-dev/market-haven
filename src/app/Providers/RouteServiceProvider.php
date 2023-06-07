@@ -34,35 +34,44 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('api')->prefix(config('route-prefix.admin.v1.prefix', 'admin/v1'))
-                ->group(function () {
-                    Route::middleware('api')->group(function () {
-                        Route::prefix(config('route-prefix.admin.v1.client', 'client'))
-                            ->group(base_path('routes/admin/v1/client.php'));
+            Route::middleware('bindings')->group(function () {
+
+                Route::middleware('api')->prefix(config('route-prefix.admin.v1.prefix', 'admin/v1'))
+                    ->group(function () {
+                        Route::middleware('api')->group(function () {
+                            Route::prefix(config('route-prefix.admin.v1.client', 'client'))
+                                ->group(base_path('routes/admin/v1/client.php'));
+                        });
+
+                        Route::middleware('auth:api')->group(function () {
+                            Route::prefix(config('route-prefix.admin.v1.category', 'category'))
+                                ->group(base_path('routes/admin/v1/category.php'));
+
+                            Route::prefix(config('route-prefix.admin.v1.brand', 'brand'))
+                                ->group(base_path('routes/admin/v1/brand.php'));
+
+                            Route::prefix(config('route-prefix.admin.v1.product', 'product'))
+                                ->group(base_path('routes/admin/v1/product.php'));
+                        });
                     });
 
-                    Route::middleware('auth:api')->group(function () {
-                        Route::prefix(config('route-prefix.admin.v1.category', 'category'))
-                            ->group(base_path('routes/admin/v1/category.php'));
+                Route::prefix(config('route-prefix.user.v1.prefix', 'user/v1'))
+                    ->group(function () {
+                        Route::middleware('api')->group(function () {
+                            Route::prefix(config('route-prefix.user.v1.client', 'client'))
+                                ->group(base_path('routes/user/v1/client.php'));
+                        });
 
-                        Route::prefix(config('route-prefix.admin.v1.brand', 'brand'))
-                            ->group(base_path('routes/admin/v1/brand.php'));
-                    });
-            });
+                        Route::middleware('auth:api')->group(function () {
+                            Route::prefix(config('route-prefix.user.v1.category', 'category'))
+                                ->group(base_path('routes/user/v1/category.php'));
 
-            Route::prefix(config('route-prefix.user.v1.prefix', 'user/v1'))
-                ->group(function () {
-                    Route::middleware('api')->group(function () {
-                        Route::prefix(config('route-prefix.user.v1.client', 'client'))
-                            ->group(base_path('routes/user/v1/client.php'));
-                    });
+                            Route::prefix(config('route-prefix.user.v1.brand', 'brand'))
+                                ->group(base_path('routes/user/v1/brand.php'));
 
-                    Route::middleware('auth:api')->group(function () {
-                        Route::prefix(config('route-prefix.user.v1.category', 'category'))
-                            ->group(base_path('routes/user/v1/category.php'));
-
-                        Route::prefix(config('route-prefix.user.v1.brand', 'brand'))
-                            ->group(base_path('routes/user/v1/brand.php'));
+                            Route::prefix(config('route-prefix.user.v1.product', 'product'))
+                                ->group(base_path('routes/user/v1/product.php'));
+                        });
                     });
             });
         });

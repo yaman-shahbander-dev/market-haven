@@ -7,6 +7,7 @@ return [
             'client' => 'client',
             'category' => 'category',
             'brand' => 'brand',
+            'product' => 'product',
         ],
     ],
     'user' => [
@@ -15,6 +16,7 @@ return [
             'client' => 'client',
             'category' => 'category',
             'brand' => 'brand',
+            'product' => 'product',
         ],
     ],
 ];

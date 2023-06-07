@@ -3,8 +3,11 @@
 namespace Domain\Category\Models;
 
 use Database\Factories\Category\CategoryFactory;
+use Domain\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 
@@ -34,5 +37,13 @@ class Category extends Model
     protected static function newFactory()
     {
         return CategoryFactory::new();
+    }
+
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_category')
+            ->using(new class extends Pivot {
+                use Uuid;
+            });
     }
 }
