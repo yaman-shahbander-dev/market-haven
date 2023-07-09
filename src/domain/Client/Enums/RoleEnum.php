@@ -30,12 +30,14 @@ enum RoleEnum: string
                 PermissionEnum::PRODUCT_CREATE->value,
                 PermissionEnum::PRODUCT_UPDATE->value,
                 PermissionEnum::PRODUCT_DELETE->value,
+                PermissionEnum::CART_VIEW_ANY->value,
             ],
             self::USER->value => [
                 PermissionEnum::USER_VIEW_ANY->value,
                 PermissionEnum::CATEGORY_VIEW_ANY->value,
                 PermissionEnum::BRAND_VIEW_ANY->value,
                 PermissionEnum::PRODUCT_VIEW_ANY->value,
+                PermissionEnum::CART_VIEW_ANY->value,
             ]
         ];
     }

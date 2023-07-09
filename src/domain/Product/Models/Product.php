@@ -4,7 +4,9 @@ namespace Domain\Product\Models;
 
 use Database\Factories\Product\ProductFactory;
 use Domain\Brand\Models\Brand;
+use Domain\Cart\Models\Cart;
 use Domain\Category\Models\Category;
+use Domain\Product\QueryBuilders\ProductQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Shared\Traits\Uuid;
 use Domain\Product\Models\ProductDetail;
 use \Domain\Product\Models\ProductBrand;
@@ -45,6 +48,11 @@ class Product extends Model
         return ProductFactory::new();
     }
 
+    public function newEloquentBuilder($query): ProductQueryBuilder
+    {
+        return new ProductQueryBuilder($query);
+    }
+
     public function productDetail(): HasOne
     {
         return $this->hasOne(ProductDetail::class);
@@ -69,5 +77,10 @@ class Product extends Model
             ->using(new class extends Pivot {
                use Uuid;
             });
+    }
+
+    public function carts(): BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class, 'cart_product');
     }
 }

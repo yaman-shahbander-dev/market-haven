@@ -5,6 +5,8 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 use Domain\Brand\Models\Brand;
 use Domain\Brand\Policies\BrandPolicy;
+use Domain\Cart\Models\Cart;
+use Domain\Cart\Policies\CartPolicy;
 use Domain\Category\Models\Category;
 use Domain\Category\Policies\CategoryPolicy;
 use Domain\Product\Models\Product;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         Category::class => CategoryPolicy::class,
         Brand::class => BrandPolicy::class,
         Product::class => ProductPolicy::class,
+        Cart::class => CartPolicy::class,
     ];
 
     /**

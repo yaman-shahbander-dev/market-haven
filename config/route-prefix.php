@@ -8,6 +8,8 @@ return [
             'category' => 'category',
             'brand' => 'brand',
             'product' => 'product',
+            'cart' => 'cart',
+            'order' => 'order',
         ],
     ],
     'user' => [
@@ -17,6 +19,8 @@ return [
             'category' => 'category',
             'brand' => 'brand',
             'product' => 'product',
+            'cart' => 'cart',
+            'order' => 'order',
         ],
     ],
 ];

@@ -3,14 +3,17 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Factories\Product\ProductFactory;
 use Database\Seeders\Brand\BrandSeeder;
+use Database\Seeders\Cart\CartProductSeeder;
+use Database\Seeders\Cart\CartSeeder;
 use Database\Seeders\Category\CategorySeeder;
 use Database\Seeders\Client\AdminPermissionSeeder;
 use Database\Seeders\Client\PermissionSeeder;
 use Database\Seeders\Client\RolePermissionSeeder;
 use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
+use Database\Seeders\Order\OrderProductSeeder;
+use Database\Seeders\Order\OrderSeeder;
 use Database\Seeders\Product\ProductBrandSeeder;
 use Database\Seeders\Product\ProductCategorySeeder;
 use Database\Seeders\Product\ProductColorsSeeder;
@@ -48,6 +51,10 @@ class DatabaseSeeder extends Seeder
             ProductColorsSeeder::class,
             ProductBrandSeeder::class,
             ProductCategorySeeder::class,
+            CartSeeder::class,
+            CartProductSeeder::class,
+            OrderSeeder::class,
+            OrderProductSeeder::class,
         ];
 
         /*
