@@ -24,6 +24,7 @@ class CartFactory extends Factory
                 User::query()->first() ??
                 UserFactory::new()->create()
             )->id,
+            'name' => fake()->unique()->word(),
             'quantity' => fake()->randomDigitNotZero(),
             'price' => fake()->randomDigitNotZero(),
             'created_at' => now(),

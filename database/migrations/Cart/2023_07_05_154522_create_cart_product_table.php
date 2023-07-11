@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id');
             $table->foreignUuid('product_id');
             $table->foreignUuid('cart_id');
-            $table->integer('quantity');
-            $table->double('price', 15, 2);
+            $table->integer('quantity')->default(0);
+            $table->double('price', 15, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');

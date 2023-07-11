@@ -29,4 +29,8 @@ enum PermissionEnum: string
     case PRODUCT_DELETE = 'product.delete.*';
 
     case CART_VIEW_ANY = 'cart.view.*';
+    case CART_CREATE = 'cart.create.*';
+    case CART_DELETE = 'cart.delete.*';
+    case CART_ADD = 'cart.add.*';
+    case CART_REMOVE = 'cart.remove.*';
 }

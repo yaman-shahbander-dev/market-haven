@@ -14,4 +14,24 @@ class CartPolicy
     {
         return $user->can(PermissionEnum::CART_VIEW_ANY->value);
     }
+
+    public function create(User $user, Cart $cart): bool
+    {
+        return $user->can(PermissionEnum::CART_CREATE->value);
+    }
+
+    public function delete(User $user, Cart $cart): bool
+    {
+        return ($user->can(PermissionEnum::CART_DELETE->value) && $cart->user_id === $user->id);
+    }
+
+    public function add(User $user, Cart $cart): bool
+    {
+        return ($user->can(PermissionEnum::CART_ADD->value) && $cart->user_id === $user->id);
+    }
+
+    public function remove(User $user, Cart $cart): bool
+    {
+        return ($user->can(PermissionEnum::CART_REMOVE->value) && $cart->user_id === $user->id);
+    }
 }

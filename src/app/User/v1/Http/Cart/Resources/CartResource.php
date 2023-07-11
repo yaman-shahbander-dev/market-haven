@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Admin\v1\Http\Cart\Resources;
+namespace App\User\v1\Http\Cart\Resources;
 
-use App\Admin\v1\Http\Product\Resources\ProductResource;
+use App\User\v1\Http\Product\Resources\ProductResource;
 use App\Helpers\HasPaginatedCollection;
 use App\User\v1\Http\Client\Resources\UserResource;
 use Illuminate\Http\Request;

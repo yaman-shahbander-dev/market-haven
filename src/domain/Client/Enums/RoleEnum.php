@@ -38,6 +38,10 @@ enum RoleEnum: string
                 PermissionEnum::BRAND_VIEW_ANY->value,
                 PermissionEnum::PRODUCT_VIEW_ANY->value,
                 PermissionEnum::CART_VIEW_ANY->value,
+                PermissionEnum::CART_CREATE->value,
+                PermissionEnum::CART_DELETE->value,
+                PermissionEnum::CART_ADD->value,
+                PermissionEnum::CART_REMOVE->value,
             ]
         ];
     }

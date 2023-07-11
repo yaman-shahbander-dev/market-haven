@@ -5,6 +5,7 @@ namespace Domain\Cart\Models;
 use Database\Factories\Cart\CartProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 
@@ -38,5 +39,8 @@ class CartProduct extends Model
         return CartProductFactory::new();
     }
 
-
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }
