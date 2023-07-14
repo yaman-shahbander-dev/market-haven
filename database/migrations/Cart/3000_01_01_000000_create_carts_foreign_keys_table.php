@@ -17,6 +17,7 @@ return new class extends Migration
 
         Schema::table('cart_product', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_color_id')->references('id')->on('product_colors');
             $table->foreign('cart_id')->references('id')->on('carts');
         });
     }
@@ -32,6 +33,7 @@ return new class extends Migration
 
         Schema::table('cart_product', function (Blueprint $table) {
             $table->dropForeign('cart_product_product_id_foreign');
+            $table->dropForeign('cart_product_product_color_id_foreign');
             $table->dropForeign('cart_product_cart_id_foreign');
         });
     }

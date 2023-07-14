@@ -14,6 +14,7 @@ use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
 use Database\Seeders\Order\OrderProductSeeder;
 use Database\Seeders\Order\OrderSeeder;
+use Database\Seeders\Payment\GatewaySeeder;
 use Database\Seeders\Product\ProductBrandSeeder;
 use Database\Seeders\Product\ProductCategorySeeder;
 use Database\Seeders\Product\ProductColorsSeeder;
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
             CartProductSeeder::class,
             OrderSeeder::class,
             OrderProductSeeder::class,
+            GatewaySeeder::class,
         ];
 
         /*

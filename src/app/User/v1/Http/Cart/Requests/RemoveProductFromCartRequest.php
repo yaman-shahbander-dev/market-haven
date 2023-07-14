@@ -2,6 +2,7 @@
 namespace App\User\v1\Http\Cart\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RemoveProductFromCartRequest extends FormRequest
 {
@@ -27,6 +28,11 @@ class RemoveProductFromCartRequest extends FormRequest
                 'integer',
                 'min:1'
             ],
+            'product_color_id' => [
+                'required',
+                'uuid',
+                Rule::exists('product_colors', 'id')
+            ]
         ];
     }
 }

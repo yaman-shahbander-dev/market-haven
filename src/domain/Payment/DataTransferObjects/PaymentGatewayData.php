@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Cart\DataTransferObjects;
+namespace Domain\Payment\DataTransferObjects;
 
 use Carbon\Carbon;
 use Shared\Helpers\BaseData;
@@ -8,15 +8,13 @@ use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class CartProductData extends BaseData
+class PaymentGatewayData extends BaseData
 {
     public function __construct(
         public ?string $id,
-        public string $productId,
-        public string $productColorId,
-        public string $cartId,
-        public string $quantity,
-        public string $price,
+        public string $name,
+        public string $key,
+        public ?Carbon $disabledAt,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
         public ?Carbon $deletedAt,

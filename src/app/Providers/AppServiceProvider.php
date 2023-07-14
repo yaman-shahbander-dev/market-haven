@@ -5,6 +5,8 @@ namespace App\Providers;
 use Domain\Client\Managers\IManagers\IProviderManager;
 use Domain\Client\Managers\Managers\ProviderManager;
 use Domain\Client\Services\IServices\IProviderService;
+use Domain\Payment\Managers\IManagers\IPaymentManager;
+use Domain\Payment\Managers\Managers\PaymentManager;
 use Domain\Product\Builders\Builders\ProductBuilder;
 use Domain\Product\Builders\IBuilders\IProductBuilder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(IProviderManager::class, ProviderManager::class);
         $this->app->bind(IProductBuilder::class, ProductBuilder::class);
+        $this->app->bind(IPaymentManager::class, PaymentManager::class);
 
         if ($this->app->environment('local')) {
             \DB::listen(function ($query) {
@@ -53,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Product',
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Cart',
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Order',
+            database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Payment',
         ]);
 
 

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id');
+            $table->unsignedBigInteger('no')->unique();
             $table->foreignUuid('user_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('state');
-            $table->double('price', 15, 2);
+            $table->string('payment_gateway')->nullable();
+            $table->decimal('price', 15, 2)->default(0.0);
+            $table->string('state');//->default(Pending::getMorphClass());
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

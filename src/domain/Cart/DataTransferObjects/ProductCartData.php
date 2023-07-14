@@ -13,6 +13,7 @@ class ProductCartData extends BaseData
     public function __construct(
         public ?string $id,
         public string $productId,
+        public string $productColorId,
         public string $cartId,
         public string $quantity,
         public string $price,

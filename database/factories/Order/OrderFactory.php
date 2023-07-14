@@ -3,6 +3,7 @@
 namespace Database\Factories\Order;
 
 use Domain\Order\Models\Order;
+use Domain\Payment\Enums\PaymentGatewayEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Domain\Client\Models\User;
 use Database\Factories\Client\UserFactory;
@@ -20,6 +21,7 @@ class OrderFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
+            'no' => $this->faker->unique()->numberBetween(1, 1000),
             'user_id' => (
                 User::query()->first() ??
                 UserFactory::new()->create()
@@ -27,8 +29,9 @@ class OrderFactory extends Factory
             'first_name' => fake()->word(),
             'last_name' => fake()->word(),
             'email' => fake()->email(),
-            'state' => fake()->word(),
-            'price' => fake()->randomDigitNotZero(),
+            'payment_gateway' => $this->faker->randomElement(PaymentGatewayEnum::getValues()),
+            'price' => $this->faker->numerify('#'),
+            'state' => fake()->word(), // Placed::getMorphClass(),
             'expired_at' => null,
             'created_at' => now(),
             'updated_at' => now(),

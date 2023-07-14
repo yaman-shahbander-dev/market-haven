@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
+use Domain\Payment\Enums\PaymentGatewayEnum;
 
 class Order extends Model
 {
@@ -24,20 +25,38 @@ class Order extends Model
      */
     protected $fillable = [
         'id',
+        'no',
         'user_id',
         'first_name',
         'last_name',
         'email',
-        'state',
+        'payment_gateway',
         'price',
+        'state',
         'expired_at',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
+    protected array $enumCasts = [
+        'payment_gateway' => PaymentGatewayEnum::class,
+    ];
+
+    protected $casts = [
+        'price' => 'double',
+//        'state' => OrderState::class,
+        'no' => 'integer',
+        'expired_at' => 'datetime',
+    ];
+
     protected static function newFactory(): OrderFactory
     {
         return OrderFactory::new();
+    }
+
+    public function setSerialNumber(): void
+    {
+        $this->no = $this->query()->max('no') + 1;
     }
 }

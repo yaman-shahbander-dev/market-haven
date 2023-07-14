@@ -18,7 +18,10 @@ class IncrementCartProductAction
     public function handle(Cart $cart, ProductCartData $data): bool
     {
         $cartProduct = $cart->cartProducts()
-            ->where('product_id', $data->productId)
+            ->where([
+                'product_id' => $data->productId,
+                'product_color_id' => $data->productColorId
+            ])
             ->first();
 
         if ($cartProduct) {
@@ -30,6 +33,7 @@ class IncrementCartProductAction
 
         return !!$cart->cartProducts()->create([
             'product_id' => $data->productId,
+            'product_color_id' => $data->productColorId,
             'quantity' => $data->quantity,
             'price' => $data->price,
         ]);

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart_product', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignUuid('product_id');
-            $table->foreignUuid('product_color_id');
-            $table->foreignUuid('cart_id');
-            $table->integer('quantity')->default(0);
-            $table->double('price', 15, 2)->default(0);
+        Schema::create('payment_gateways', function (Blueprint $table) {
+            $table->unsignedMediumInteger('id');
+            $table->string('name', 50);
+            $table->string('key', 50)->unique();
+            $table->timestamp('disabled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart_product');
+        Schema::dropIfExists('payment_gateways');
     }
 };

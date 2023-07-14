@@ -3,6 +3,7 @@
 namespace Database\Seeders\Cart;
 
 use Database\Factories\Cart\CartFactory;
+use Database\Factories\Product\ProductColorsFactory;
 use Database\Factories\Product\ProductDetailsFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +21,12 @@ class CartProductSeeder extends Seeder
         DB::table('cart_product')->truncate();
         $cart = CartFactory::new()->create();
         $products = ProductDetailsFactory::new()->count(5)->create();
+        $productsColors = ProductColorsFactory::new()->count(5)->create();
         $data = [];
         for ($i = 0; $i < count($products); $i++) {
             $data[$i]['id'] = Str::orderedUuid()->toString();
             $data[$i]['product_id'] = $products[$i]['id'];
+            $data[$i]['product_color_id'] = $productsColors[$i]['id'];
             $data[$i]['cart_id'] = $cart->id;
             $data[$i]['price'] = $products[$i]['price'];
             $data[$i]['quantity'] = $products[$i]['quantity'];
