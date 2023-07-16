@@ -18,8 +18,8 @@ class OrderData extends BaseData
         public string $lastName,
         public string $email,
         public ?string $payment_gateway,
-        public float $price,
-        public string $state, //public ?OrderState $state;
+        public ?float $price,
+        public ?string $state, //public ?OrderState $state;
         public ?Carbon $expiredAt,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,

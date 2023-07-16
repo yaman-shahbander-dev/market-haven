@@ -77,6 +77,9 @@ class RouteServiceProvider extends ServiceProvider
 
                             Route::prefix(config('route-prefix.user.v1.cart', 'cart'))
                                 ->group(base_path('routes/user/v1/cart.php'));
+
+                            Route::prefix(config('route-prefix.user.v1.order', 'order'))
+                                ->group(base_path('routes/user/v1/order.php'));
                         });
                     });
             });

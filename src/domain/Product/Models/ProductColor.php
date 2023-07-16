@@ -3,9 +3,11 @@
 namespace Domain\Product\Models;
 
 use Database\Factories\Product\ProductColorsFactory;
+use Domain\Cart\Models\CartProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 use Domain\Product\Models\ProductDetail;
@@ -42,5 +44,10 @@ class ProductColor extends Model
     public function productDetail(): BelongsTo
     {
         return $this->belongsTo(ProductDetail::class);
+    }
+
+    public function cartProducts(): HasMany
+    {
+        return $this->hasMany(CartProduct::class);
     }
 }
