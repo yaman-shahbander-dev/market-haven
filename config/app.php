@@ -143,6 +143,10 @@ return [
         // 'store'  => 'redis',
     ],
 
+    'default' => [
+        'order_expiry' => 30
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

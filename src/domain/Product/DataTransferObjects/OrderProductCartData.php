@@ -8,16 +8,16 @@ use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class ProductColorData extends BaseData
+class OrderProductCartData extends BaseData
 {
     public function __construct(
         public ?string $id,
-        public ?string $productDetailId,
-        public string $color,
-        public int $quantity,
+        public string $title,
+        public string $description,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
         public ?Carbon $deletedAt,
+        public ProductDetailData $productDetail,
     ) {
     }
 }

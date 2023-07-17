@@ -3,8 +3,11 @@
 namespace Domain\Order\DataTransferObjects;
 
 use Carbon\Carbon;
+use Domain\Cart\DataTransferObjects\CartProductData;
 use Shared\Helpers\BaseData;
+use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
@@ -13,13 +16,16 @@ class OrderData extends BaseData
     public function __construct(
         public ?string $id,
         public ?int $no,
-        public string $userId,
         public string $firstName,
         public string $lastName,
         public string $email,
-        public ?string $payment_gateway,
+        public string $paymentGateway,
         public ?float $price,
-        public ?string $state, //public ?OrderState $state;
+        public ?string $state,  //public ?OrderState $state;
+        public string $cartId,
+        public string $userId,
+        #[DataCollectionOf(CartProductData::class)]
+        public DataCollection $cartProducts,
         public ?Carbon $expiredAt,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,

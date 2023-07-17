@@ -2,11 +2,18 @@
 
 namespace Domain\Order\Actions\User;
 
+use Domain\Cart\DataTransferObjects\CartProductData;
 use Domain\Cart\Models\Cart;
 use Domain\Cart\Models\CartProduct;
-use Illuminate\Database\Eloquent\Collection;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Spatie\LaravelData\DataCollection;
 
+/**
+ * Get cart products
+ * @param Cart $cart
+ * @param DataCollection<CartProductData> $cartProducts
+ * @return DataCollection<CartProductData>
+ * */
 class GetCartProductsAction
 {
     use AsAction;
@@ -16,10 +23,9 @@ class GetCartProductsAction
     ) {
     }
 
-    public function handle(Cart $cart, array $cartProducts): Collection
+    public function handle(Cart $cart, DataCollection $cartProducts): DataCollection
     {
-
-        return $cart
+        $cartProducts = $cart
             ->cartProducts()
             ->whereIn('id', collect($cartProducts)->pluck('id'))
             ->with([
@@ -29,5 +35,7 @@ class GetCartProductsAction
                 'productColor'
             ])
             ->get();
+
+        return CartProductData::collection($cartProducts);
     }
 }

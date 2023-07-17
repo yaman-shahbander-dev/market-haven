@@ -55,8 +55,8 @@ class Order extends Model
         return OrderFactory::new();
     }
 
-    public function setSerialNumber(): void
+    public function setSerialNumber(): int
     {
-        $this->no = $this->query()->max('no') + 1;
+        return $this->query()->max('no') + 1;
     }
 }

@@ -17,18 +17,20 @@ class CheckCartProductQuantityAction
 
     public function handle($cartProducts, $cartProductsData): bool
     {
-        foreach ($cartProducts as $i => $cartProduct) {
-            $cartProductData = $cartProductsData[$i];
+        $result = collect($cartProducts)->filter(function ($cartProduct, $key) use ($cartProductsData) {
+            $cartProductDataQuantity = $cartProductsData[$key]->quantity;
 
-            if ($cartProductData['quantity'] > $cartProduct['quantity']) {
+            if ($cartProductDataQuantity > $cartProduct['quantity']) {
                 return false;
             }
 
-            if ($cartProductData['quantity'] > $cartProduct['productColor']['quantity']) {
+            if ($cartProductDataQuantity > $cartProduct['product_color']['quantity']) {
                 return throw new ProductQuantityNotEnoughException($cartProduct['product']['title']);
             }
-        }
 
-        return true;
+            return true;
+        });
+
+        return $result->isNotEmpty();
     }
 }
