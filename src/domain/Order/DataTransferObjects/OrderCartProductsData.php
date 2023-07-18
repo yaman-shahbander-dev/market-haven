@@ -4,6 +4,7 @@ namespace Domain\Order\DataTransferObjects;
 
 use Domain\Cart\DataTransferObjects\CartData;
 use Domain\Cart\DataTransferObjects\CartProductData;
+use Domain\Order\Models\Order;
 use Shared\Helpers\BaseData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
@@ -17,7 +18,7 @@ class OrderCartProductsData extends BaseData
         public OrderData $orderData,
         #[DataCollectionOf(CartProductData::class)]
         public DataCollection $cartProducts,
-        public CartData $cart,
+        public CartData $cart
     ) {
     }
 }

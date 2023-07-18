@@ -4,6 +4,9 @@ namespace Domain\Order\Actions\User;
 
 use Domain\Order\DataTransferObjects\OrderCartProductsData;
 use Domain\Order\Models\Order;
+use Domain\Payment\Actions\CreatePaymentAction;
+use Domain\Payment\Managers\IManagers\IPaymentManager;
+use Domain\Payment\Models\PaymentGateway;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -16,7 +19,9 @@ class OrderCreateAction
     use AsAction;
 
     public function __construct(
-        protected Order $order
+        protected Order $order,
+        protected IPaymentManager $paymentManager,
+        protected PaymentGateway $paymentGateway
     ) {
     }
 
@@ -37,8 +42,14 @@ class OrderCreateAction
                 'updated_at' => now()
             ]);
 
+
         if ($order) {
-            return UpdateCartQuantityAndPriceAction::run($data);
+            $result1 = UpdateCartQuantityAndPriceAction::run($data);
+            $result2 = UpdateProductsAndColorsQuantityAction::run($data);
+
+            if ($result1 && $result2) {
+                return CreatePaymentAction::run($data, $order);
+            }
         }
 
         return false;

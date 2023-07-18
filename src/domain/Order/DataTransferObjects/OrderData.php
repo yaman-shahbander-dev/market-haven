@@ -22,10 +22,10 @@ class OrderData extends BaseData
         public string $paymentGateway,
         public ?float $price,
         public ?string $state,  //public ?OrderState $state;
-        public string $cartId,
+        public ?string $cartId,
         public string $userId,
         #[DataCollectionOf(CartProductData::class)]
-        public DataCollection $cartProducts,
+        public ?DataCollection $cartProducts,
         public ?Carbon $expiredAt,
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,

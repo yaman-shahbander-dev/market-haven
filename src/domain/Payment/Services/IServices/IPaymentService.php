@@ -2,7 +2,9 @@
 
 namespace Domain\Payment\Services\IServices;
 
+use Domain\Order\Models\Order;
+
 interface IPaymentService
 {
-
+    public function createPayment(Order $order);
 }

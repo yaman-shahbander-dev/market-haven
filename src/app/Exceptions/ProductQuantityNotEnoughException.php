@@ -15,6 +15,6 @@ class ProductQuantityNotEnoughException extends Exception
 
     public function render(): JsonResponse
     {
-        return response()->json(['data' => 'There is not enough quantity for product' . $this->title], Response::HTTP_BAD_REQUEST, []);
+        return response()->json(['data' => 'There is no enough quantity for product' . $this->title], Response::HTTP_BAD_REQUEST, []);
     }
 }

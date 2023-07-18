@@ -14,6 +14,7 @@ class EPayment extends Model
     protected $table = 'e_payments';
 
     protected $fillable = [
+        'id',
         'gateway_id',
         'gateway_payment_id',
         'gateway_client_payment_id',
