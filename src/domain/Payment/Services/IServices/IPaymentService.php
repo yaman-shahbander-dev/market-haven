@@ -7,4 +7,5 @@ use Domain\Order\Models\Order;
 interface IPaymentService
 {
     public function createPayment(Order $order);
+    public function checkCapablePayment(string $orderId);
 }

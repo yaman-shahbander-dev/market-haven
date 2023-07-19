@@ -144,7 +144,7 @@ return [
     ],
 
     'default' => [
-        'order_expiry' => 300,
+        'order_expiry' => 30,
     ],
 
     /*

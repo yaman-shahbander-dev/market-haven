@@ -6,4 +6,5 @@ Route::name('user.')
     ->controller(OrderController::class)
     ->group(function () {
         Route::post('/order', 'store')->name('order.store');
+        Route::post('/order/order-confirm', 'confirm')->name('order.confirm');
     });

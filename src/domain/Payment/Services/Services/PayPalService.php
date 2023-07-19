@@ -11,4 +11,9 @@ class PayPalService implements IPaymentService
     {
         return $order;
     }
+
+    public function checkCapablePayment(string $orderId)
+    {
+        return $orderId;
+    }
 }
