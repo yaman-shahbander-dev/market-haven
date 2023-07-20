@@ -3,6 +3,7 @@
 namespace Domain\Order\Models;
 
 use Database\Factories\Order\OrderFactory;
+use Domain\Payment\DataTransferObjects\OrderEPaymentData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -58,5 +59,12 @@ class Order extends Model
     public function setSerialNumber(): int
     {
         return $this->query()->max('no') + 1;
+    }
+
+    public function isCaptureable(OrderEPaymentData $data): bool
+    {
+        return
+            $this->user_id = $data->order->userId &&
+            $this->expired_at >= now();
     }
 }

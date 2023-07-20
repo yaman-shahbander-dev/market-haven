@@ -8,4 +8,5 @@ interface IPaymentService
 {
     public function createPayment(Order $order);
     public function checkCapablePayment(string $orderId);
+    public function confirmPayment(string $orderId);
 }

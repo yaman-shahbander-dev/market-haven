@@ -2,14 +2,17 @@
 
 namespace Domain\Payment\Models;
 
+use Domain\Payment\States\PaymentState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
+use Spatie\ModelStates\HasStates;
 
 class EPayment extends Model
 {
     use Uuid, HasFactory, SoftDeletes;
+//    use Uuid, HasFactory, SoftDeletes, HasStates;
 
     protected $table = 'e_payments';
 
@@ -35,4 +38,5 @@ class EPayment extends Model
 //        'state' => PaymentState::class,
         'confirmed_at' => 'datetime',
     ];
+
 }

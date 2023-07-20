@@ -5,7 +5,9 @@ namespace App\Providers;
 use Domain\Client\Managers\IManagers\IProviderManager;
 use Domain\Client\Managers\Managers\ProviderManager;
 use Domain\Client\Services\IServices\IProviderService;
+use Domain\Payment\Actions\Stripe\ConfirmPaymentAction;
 use Domain\Payment\Actions\Stripe\CreatePaymentAction;
+use Domain\Payment\Actions\Stripe\GetPaymentAction;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
 use Domain\Payment\Managers\Managers\PaymentManager;
 use Domain\Product\Builders\Builders\ProductBuilder;
@@ -31,6 +33,16 @@ class AppServiceProvider extends ServiceProvider
             CreatePaymentAction::class,
             // to be changed
             fn () => new CreatePaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
+        );
+        $this->app->bind(
+            GetPaymentAction::class,
+            // to be changed
+            fn () => new GetPaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
+        );
+        $this->app->bind(
+            ConfirmPaymentAction::class,
+            // to be changed
+            fn () => new ConfirmPaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
         );
 
         if ($this->app->environment('local')) {

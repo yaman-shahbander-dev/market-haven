@@ -12,7 +12,7 @@ class SetOrderExpiredAt
 {
     public function handle(OrderCartProductsData $data, \Closure $next)
     {
-        $data->orderData->expiredAt = now()->addMinutes(config('app.default.order_expiry', 30));
+        $data->orderData->expiredAt = now()->addMinutes(config('app.default.order_expiry', 300));
 
         return $next($data);
     }

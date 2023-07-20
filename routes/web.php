@@ -30,17 +30,17 @@ Route::get('/', function () {
 //});
 
 // for testing stripe confirm payment
-//$clientSecret = 'pi_3NVcTNH3qVRn63M21WQF130X_secret_bqYA6QPBEF0FyigZproZvV5aY';
-//Route::get('/stripe-key', function () use ($clientSecret) {
-//    return response()->json([
-//        'publishableKey' => config('payment.stripe.public_key'),
-//        'clientSecret' => $clientSecret
-//    ]);
-//});
-//Route::get('pay', function () use ($clientSecret) {
-//    return response()->json([
-//        'error' => false,
-//        'requiresAction' => false,
-//        'clientSecret' => $clientSecret
-//    ], 200);
-//});
+$clientSecret = 'pi_3NW1LCH3qVRn63M20gYQeu7J_secret_leJPciEu4K9JLV5016vc8eKus';
+Route::get('/stripe-key', function () use ($clientSecret) {
+    return response()->json([
+        'publishableKey' => config('payment.stripe.public_key', 'pk_test_51L1rOdH3qVRn63M2Mk0rJKMmfbCPIKiTPCEKW6Q0DTPIj8hKVyRKHEuWbZiN1xacF6NxwCgzVNox1iDXgTdC2TXT000nGV1wXu'),
+        'clientSecret' => $clientSecret
+    ]);
+})->middleware('cors');
+Route::get('pay', function () use ($clientSecret) {
+    return response()->json([
+        'error' => false,
+        'requiresAction' => false,
+        'clientSecret' => $clientSecret
+    ], 200);
+})->middleware('cors');

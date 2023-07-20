@@ -21,7 +21,7 @@ class OrderController extends Controller
 
         try {
             $orderEPayment = CreateOrderAction::run(OrderData::from($request));
-            Cache::put($orderEPayment->ePayment->gatewayClientPaymentId, $orderEPayment, 7200);
+            Cache::put($orderEPayment->ePayment->gatewayClientPaymentId, $orderEPayment, 28800);
             DB::commit();
         } catch (\Exception $exception) {
             $orderEPayment = false;
@@ -33,15 +33,25 @@ class OrderController extends Controller
             : $this->failedResponse();
     }
 
-    public function confirm(ConfirmOrderRequest $request)
+    public function confirm(ConfirmOrderRequest $request)//: JsonResponse
     {
         //$this->authorize()
         $gatewayClientPaymentId = $request->get('gateway_client_payment_id');
         if (Cache::missing($gatewayClientPaymentId)) return $this->failedResponse('Payment not found.');
 
-        $result = ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
+        return ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
+        DB::beginTransaction();
+        try {
+            $result = ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
+            DB::commit();
+        } catch (\Exception $exception) {
+            $result = false;
+            DB::rollBack();
+        }
 
-//        Cache::forget($gatewayClientPaymentId);
-        return $result;
+        Cache::forget($gatewayClientPaymentId);
+        return $result
+            ? $this->okResponse()
+            : $this->failedResponse();
     }
 }

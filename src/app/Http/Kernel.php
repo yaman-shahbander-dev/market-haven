@@ -74,6 +74,7 @@ class Kernel extends HttpKernel
         'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
         'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cors' => \App\Http\Middleware\CorsMiddleware::class,
     ];
 
     protected function bootstrappers()
