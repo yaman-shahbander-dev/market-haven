@@ -11,6 +11,7 @@ use Domain\Order\DataTransferObjects\OrderData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Shared\Helpers\ErrorResult;
 
 class OrderController extends Controller
 {
@@ -19,39 +20,35 @@ class OrderController extends Controller
         //$this->authorize()
         DB::beginTransaction();
 
-        try {
-            $orderEPayment = CreateOrderAction::run(OrderData::from($request));
-            Cache::put($orderEPayment->ePayment->gatewayClientPaymentId, $orderEPayment, 28800);
-            DB::commit();
-        } catch (\Exception $exception) {
-            $orderEPayment = false;
+        $orderEPayment = CreateOrderAction::run(OrderData::from($request));
+
+        if ($orderEPayment instanceof ErrorResult) {
             DB::rollBack();
+            return $this->failedResponse();
         }
 
-        return $orderEPayment
-            ? $this->okResponse()
-            : $this->failedResponse();
+        DB::commit();
+        Cache::put($orderEPayment->ePayment->gatewayClientPaymentId, $orderEPayment, 28800);
+
+        return $this->okResponse();
     }
 
-    public function confirm(ConfirmOrderRequest $request)//: JsonResponse
+    public function confirm(ConfirmOrderRequest $request): JsonResponse
     {
         //$this->authorize()
         $gatewayClientPaymentId = $request->get('gateway_client_payment_id');
         if (Cache::missing($gatewayClientPaymentId)) return $this->failedResponse('Payment not found.');
 
-        return ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
         DB::beginTransaction();
-        try {
-            $result = ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
-            DB::commit();
-        } catch (\Exception $exception) {
-            $result = false;
+        $result = ConfirmOrderAction::run(Cache::get($gatewayClientPaymentId));
+        if ($result instanceof ErrorResult) {
             DB::rollBack();
+            return $this->failedResponse();
         }
 
+        DB::commit();
         Cache::forget($gatewayClientPaymentId);
-        return $result
-            ? $this->okResponse()
-            : $this->failedResponse();
+
+        return $this->okResponse();
     }
 }

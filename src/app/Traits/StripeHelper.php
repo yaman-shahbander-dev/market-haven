@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Enums\StatusCodes\HttpStatus;
 use Exception;
+use Shared\Helpers\ErrorResult;
 use Stripe\Exception\ApiConnectionException;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\AuthenticationException;
@@ -14,9 +15,9 @@ trait StripeHelper
 {
     public function getExceptionDto(
         ?Exception $exception = null,
-        ?int $state = null,
+        mixed $state = null,
         ?string $massage = null
-    ): array {
+    ): ErrorResult {
         $message = $massage ?? $exception?->getMessage();
         if ($exception instanceof CardException) {
             $massage = $exception->getError()->message;
@@ -34,9 +35,9 @@ trait StripeHelper
             $massage = 'Payment Server  Error';
             $state = HttpStatus::INTERNAL_SERVER_ERROR;
         }
-        return [
+        return ErrorResult::from([
             'state' => $state,
             'massage' => $massage
-        ];
+        ]);
     }
 }

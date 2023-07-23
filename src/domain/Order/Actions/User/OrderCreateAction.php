@@ -8,6 +8,7 @@ use Domain\Payment\Actions\CreatePaymentAction;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
 use Domain\Payment\Models\PaymentGateway;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Shared\Helpers\ErrorResult;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
@@ -43,15 +44,13 @@ class OrderCreateAction
             ]);
 
 
-        if ($order) {
-            $result1 = UpdateCartQuantityAndPriceAction::run($data);
-            $result2 = UpdateProductsAndColorsQuantityAction::run($data);
+        if (!$order) return ErrorResult::from([]);
 
-            if ($result1 && $result2) {
-                return CreatePaymentAction::run($data, $order);
-            }
-        }
+        $result1 = UpdateCartQuantityAndPriceAction::run($data);
+        $result2 = UpdateProductsAndColorsQuantityAction::run($data);
 
-        return false;
+        if(!($result1 && $result2)) return ErrorResult::from([]);
+
+        return CreatePaymentAction::run($data, $order);
     }
 }

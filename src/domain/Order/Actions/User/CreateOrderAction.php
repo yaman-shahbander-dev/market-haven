@@ -8,6 +8,7 @@ use Domain\Cart\Models\Cart;
 use Domain\Order\DataTransferObjects\OrderCartProductsData;
 use Domain\Order\DataTransferObjects\OrderData;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Shared\Helpers\ErrorResult;
 use Spatie\LaravelData\DataCollection;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -40,16 +41,12 @@ class CreateOrderAction
 
         $cartProducts = GetCartProductsAction::run($cart, $orderData->cartProducts);
 
-        if (!empty($cartProducts)) {
-            if (CheckCartProductQuantityAction::run($cartProducts, $orderData->cartProducts)) {
-                // create product in db
-                //final result is returned in here
-                return FillOrderDataAction::run(
-                    OrderCartProductsData::from(['order_data' => $orderData, 'cart_products' => $cartProducts, 'cart' => $cart])
-                );
-            }
-            return false;
-        }
-        return false;
+        if (empty($cartProducts)) return ErrorResult::from([]);
+
+        if (!(CheckCartProductQuantityAction::run($cartProducts, $orderData->cartProducts))) return ErrorResult::from([]);
+
+        return FillOrderDataAction::run(
+            OrderCartProductsData::from(['order_data' => $orderData, 'cart_products' => $cartProducts, 'cart' => $cart])
+        );
     }
 }

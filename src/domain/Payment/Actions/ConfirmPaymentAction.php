@@ -6,6 +6,7 @@ use Domain\Order\Models\Order;
 use Domain\Payment\DataTransferObjects\OrderEPaymentData;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Shared\Helpers\ErrorResult;
 
 class ConfirmPaymentAction
 {
@@ -16,25 +17,20 @@ class ConfirmPaymentAction
     ) {
     }
 
-    public function handle(OrderEPaymentData $data)
+    public function handle(OrderEPaymentData $data): bool|ErrorResult
     {
-//        $paymentService = $this->paymentManager->make($data->order->paymentGateway);
-//        $checkOrder = $paymentService->checkCapablePayment($data->ePayment->gatewayPaymentId);
-//
-//        if (is_array($checkOrder)) return false;
-//
-//        $order = Order::find($data->order->id);
-//
-//        if (!$order->isCaptureable($data)) return false;
-//
-//        $confirm = $paymentService->confirmPayment($data->ePayment->gatewayPaymentId);
-//        return $confirm;
-//
-//        if ($confirm) {
-//            $order->state = 'captured'; // to be changed
-//            return $order->save();
-//        }
-//
-//        return false;
+        $paymentService = $this->paymentManager->make($data->order->paymentGateway);
+        $checkOrder = $paymentService->checkCapablePayment($data->ePayment->gatewayPaymentId);
+
+        if ($checkOrder instanceof ErrorResult) return $checkOrder;
+
+        $order = Order::find($data->order->id);
+
+        if (!$order->isCaptureable($data)) return ErrorResult::from(['message' => 'Order is not captureable']);
+
+        $confirm = $paymentService->confirmPayment($data->ePayment->gatewayPaymentId);
+        if ($confirm instanceof ErrorResult) return $confirm;
+
+        return $order->update(['state' => 'captured', 'user_id' => $data->order->userId]);
     }
 }
