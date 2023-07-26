@@ -3,18 +3,21 @@
 namespace Domain\Order\Models;
 
 use Database\Factories\Order\OrderFactory;
+use Domain\Order\States\OrderState;
 use Domain\Payment\DataTransferObjects\OrderEPaymentData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 use Domain\Payment\Enums\PaymentGatewayEnum;
+use Spatie\ModelStates\HasStates;
 
 class Order extends Model
 {
     use HasFactory;
     use Uuid;
     use SoftDeletes;
+    use HasStates;
 
     protected $table = 'orders';
 
@@ -46,7 +49,7 @@ class Order extends Model
 
     protected $casts = [
         'price' => 'double',
-//        'state' => OrderState::class,
+        'state' => OrderState::class,
         'no' => 'integer',
         'expired_at' => 'datetime',
     ];

@@ -4,6 +4,7 @@ namespace Domain\Order\Actions\User;
 
 use Domain\Order\DataTransferObjects\OrderCartProductsData;
 use Domain\Order\Models\Order;
+use Domain\Order\States\Pending;
 use Domain\Payment\Actions\CreatePaymentAction;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
 use Domain\Payment\Models\PaymentGateway;
@@ -45,6 +46,8 @@ class OrderCreateAction
 
 
         if (!$order) return ErrorResult::from([]);
+
+        $order->state->transitionTo(Pending::class);
 
         $result1 = UpdateCartQuantityAndPriceAction::run($data);
         $result2 = UpdateProductsAndColorsQuantityAction::run($data);

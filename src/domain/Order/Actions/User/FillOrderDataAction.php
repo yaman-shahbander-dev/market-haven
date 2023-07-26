@@ -8,7 +8,6 @@ use Domain\Order\DataTransferObjects\OrderData;
 use Domain\Order\Pipelines\CalculateOrderTotalPrice;
 use Domain\Order\Pipelines\GenerateOrderNumber;
 use Domain\Order\Pipelines\SetOrderExpiredAt;
-use Domain\Order\Pipelines\SetOrderState;
 use Illuminate\Pipeline\Pipeline;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Spatie\LaravelData\DataCollection;
@@ -34,7 +33,6 @@ class FillOrderDataAction
             ->through([
                 CalculateOrderTotalPrice::class,
                 GenerateOrderNumber::class,
-                SetOrderState::class,
                 SetOrderExpiredAt::class,
             ])
             ->then(function (OrderCartProductsData $data) {

@@ -11,6 +11,9 @@ use Domain\Payment\Actions\Stripe\GetPaymentAction;
 use Domain\Payment\DataTransferObjects\StripeData;
 use Domain\Payment\Models\EPayment;
 use Domain\Payment\Services\IServices\IPaymentService;
+use Domain\Payment\States\Approved;
+use Domain\Payment\States\Captured;
+use Domain\Payment\States\Succeed;
 use Shared\Helpers\ErrorResult;
 use Stripe\PaymentIntent;
 use Exception;
@@ -32,9 +35,8 @@ class StripeService implements IPaymentService
         $result = GetPaymentAction::run($orderId);
 
         if ($result instanceof PaymentIntent) {
-            // add state here // to be changed
             $data = StripeData::fromArray($result->toArray());
-            return ($data->state == 'approved') // to be changed
+            return ($data->state == Approved::getMorphClass())
                 ? $data
                 : ErrorResult::from(['message' => 'User did not add payment information']);
         }
@@ -51,9 +53,9 @@ class StripeService implements IPaymentService
             EPayment::query()->where('gateway_payment_id', $result->id)
                 ->update([
                     'confirmed_at' => now(),
-                    'state' => 'captured' // to be changed
+                    'state' => Captured::getMorphClass()
                 ]);
-            return $data->state == 'succeed'
+            return $data->state == Succeed::getMorphClass()
                 ? $data
                 : ErrorResult::from(['message' => 'Payment not captured.', 'state' => HttpStatus::BAD_REQUEST]);
         }

@@ -4,6 +4,7 @@ namespace Domain\Order\DataTransferObjects;
 
 use Carbon\Carbon;
 use Domain\Cart\DataTransferObjects\CartProductData;
+use Domain\Order\States\OrderState;
 use Shared\Helpers\BaseData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
@@ -21,7 +22,7 @@ class OrderData extends BaseData
         public string $email,
         public string $paymentGateway,
         public ?float $price,
-        public ?string $state,  //public ?OrderState $state;
+        public ?OrderState $state,  //public ?OrderState $state;
         public ?string $cartId,
         public string $userId,
         #[DataCollectionOf(CartProductData::class)]

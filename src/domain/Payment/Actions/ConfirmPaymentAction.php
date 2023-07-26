@@ -5,6 +5,7 @@ namespace Domain\Payment\Actions;
 use Domain\Order\Models\Order;
 use Domain\Payment\DataTransferObjects\OrderEPaymentData;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
+use Domain\Payment\States\Captured;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Shared\Helpers\ErrorResult;
 
@@ -31,6 +32,6 @@ class ConfirmPaymentAction
         $confirm = $paymentService->confirmPayment($data->ePayment->gatewayPaymentId);
         if ($confirm instanceof ErrorResult) return $confirm;
 
-        return $order->update(['state' => 'captured', 'user_id' => $data->order->userId]);
+        return $order->update(['state' => Captured::getMorphClass(), 'user_id' => $data->order->userId]);
     }
 }

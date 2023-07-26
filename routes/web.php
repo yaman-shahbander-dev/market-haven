@@ -30,7 +30,7 @@ Route::get('/', function () {
 //});
 
 // for testing stripe confirm payment
-$clientSecret = 'pi_3NX5fPH3qVRn63M21hS8GyIQ_secret_7xY8BoSQwWHLOXUMgxGnafroN';
+$clientSecret = 'pi_3NYAjOH3qVRn63M219W5Pc8j_secret_qZmvJSbZVcyVPBf3LRAiwsojT';
 Route::get('/stripe-key', function () use ($clientSecret) {
     return response()->json([
         'publishableKey' => config('payment.stripe.public_key', 'pk_test_51L1rOdH3qVRn63M2Mk0rJKMmfbCPIKiTPCEKW6Q0DTPIj8hKVyRKHEuWbZiN1xacF6NxwCgzVNox1iDXgTdC2TXT000nGV1wXu'),
