@@ -15,7 +15,7 @@ use Shared\Helpers\ErrorResult;
 
 class OrderController extends Controller
 {
-    public function store(CreateOrderRequest $request)//: JsonResponse
+    public function store(CreateOrderRequest $request): JsonResponse
     {
         //$this->authorize()
         DB::beginTransaction();
