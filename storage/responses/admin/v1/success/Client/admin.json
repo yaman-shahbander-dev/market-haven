@@ -1,0 +1,21 @@
+{
+    "message": "OK",
+    "data": {
+        "id": "991c713f-7d30-40c1-ad5e-1547ea1919cd",
+        "type": "users",
+        "attributes": {
+            "name": "Admin",
+            "first_name": "Admin",
+            "last_name": "Admin",
+            "gender": "female",
+            "scope": "admin",
+            "type": "admin",
+            "email": "admin@project.com",
+            "banned_at": null,
+            "created_at": "2023-05-07T15:46:21.000000Z",
+            "updated_at": "2023-05-07T15:46:21.000000Z",
+            "deleted_at": null,
+            "bearer_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5OTFjNzU1My1iMzliLTQyMGEtYTc5NC1jMjI1ZmI4ZDcwY2UiLCJqdGkiOiJmZDYxNzdhMzg2MjkyMGM5YzEyZWUxNGQ0OTIwMzRmN2UwNjdlNTM2MDE5NDg3NmY2ZmQ1OTgzZTQ4MGE3MWI0ODdlMzUwM2JkNGE3MmVmZCIsImlhdCI6MTY4MzgwMjU4OS42Njk3ODcsIm5iZiI6MTY4MzgwMjU4OS42Njk3OTIsImV4cCI6MTcxNTQyNDk4OS41NDQ5MjMsInN1YiI6Ijk5MWM3MTNmLTdkMzAtNDBjMS1hZDVlLTE1NDdlYTE5MTljZCIsInNjb3BlcyI6WyJhZG1pbiJdfQ.fvUIEsZ0JWuElaaz-zCN7oIDNjkuxCGqpJaJccrZvkl6OWShac6Ir0GTRedWTnmwfegEOraiVs8gnhFmJZgyXTjEAO2H5wbPAWIw5S7Or9hyzfP-Zy-dlAhedgPrHcZ200nn6s_ypG8-ps4jxEFvrbbbUXZIgSoZYniqKcdKR8HR5vpBo2CwXpe4MNpxC8NkI8jntw5i2an_Nunx0oaPZm1oQOEEgFIk0eVido7X01WNmfahAtViy5SgXxJGgGtsPeigdo7QiyfeFvSnirQgpUFgEqtJsbhBsSOF5nFTmab6f6A8118VpodfZxyvAGXjkPmoJ3h8r-Et3DbAds1SRkZ-ulWMQUvb1gDd6L69hgNMeK4YB6QsJG2knuE0xL3le849_EAcXRw3vqHamSMXYC3XrUG1OEp5GWBDfq6cbwroxFzFBQjOGSVExRiHinNwA_LKKAFwr1CLHi-aaSebRwvVk-kBtUS0hN8uX7DFepApv8qEgIju0_UuDyEPEFffKMSLiSAzEIbCzb8s3EodUjXnv247owqzjfI4b-EpCNZ2EvR8O6s4BhN1azja-7aDB7wpgsbr8A-pUt_albgR-MLJHK9MNik__8UgN3YD6Ym148nQ-5-xUMmVp7qY5HF7W3wIC3MKejVOxsZe39GM1KO8jNdOATK4bheAjfFnaSI"
+        }
+    }
+}

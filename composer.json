@@ -1,18 +1,26 @@
 {
-    "name": "abd-wazzan/laravel-api-boilerplate",
+    "name": "market/haven",
     "type": "project",
-    "description": "A Laravel project with a Domain-Driven Design (DDD) structure, basic configuration, and commonly used packages pre-installed, directed towards building APIs.",
-    "keywords": ["boilerplate", "laravel"],
+    "description": "A Laravel e-commerce project with a Domain-Driven Design (DDD) structure",
+    "keywords": ["laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
+        "bugsnag/bugsnag-laravel": "^2.0",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^10.4",
+        "laravel/octane": "^1.5",
         "laravel/passport": "^11.8",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.8",
         "lorisleiva/laravel-actions": "^2.5",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "ramsey/uuid": "^4.7",
         "spatie/laravel-data": "^3.2",
-        "spatie/laravel-query-builder": "^5.2"
+        "spatie/laravel-model-states": "^2.4",
+        "spatie/laravel-permission": "^5.10",
+        "spatie/laravel-query-builder": "^5.2",
+        "stripe/stripe-php": "^10.17"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",

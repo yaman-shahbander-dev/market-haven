@@ -7,6 +7,7 @@ namespace App\Traits;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\JsonResponse;
 use JsonSerializable;
+use Shared\Helpers\PaginatedCollectionData;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
@@ -15,7 +16,7 @@ use function response;
 trait ApiResponseHelper
 {
     public function okResponse(
-        array|Arrayable|JsonSerializable|string|null $data = [],
+        array|Arrayable|JsonSerializable|PaginatedCollectionData|string|null $data = [],
         ?string $message = null,
         array $headers = []
     ): JsonResponse {
@@ -129,7 +130,7 @@ trait ApiResponseHelper
         return response()->json($data, $code, $headers);
     }
 
-    private function morphToArray(array|Arrayable|JsonSerializable|null|string $data = []): array
+    private function morphToArray(array|Arrayable|JsonSerializable|PaginatedCollectionData|null|string $data = []): array
     {
         if (is_array($data)) {
             return $data;
@@ -141,6 +142,13 @@ trait ApiResponseHelper
 
         if ($data instanceof JsonSerializable) {
             return $data->jsonSerialize();
+        }
+
+        if ($data instanceof PaginatedCollectionData) {
+            return [
+                'collection' => $data->data,
+                'meta' => $data->paginator
+            ];
         }
 
         if (is_string($data)) {

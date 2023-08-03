@@ -143,6 +143,10 @@ return [
         // 'store'  => 'redis',
     ],
 
+    'default' => [
+        'order_expiry' => 30,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -194,7 +198,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        \App\Providers\JsonApiPaginateServiceProvider::class,
     ],
 
     /*
@@ -209,7 +214,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ])->toArray(),
 
 ];
