@@ -33,4 +33,7 @@ enum PermissionEnum: string
     case CART_DELETE = 'cart.delete.*';
     case CART_ADD = 'cart.add.*';
     case CART_REMOVE = 'cart.remove.*';
+
+    case ORDER_CREATE = 'order.create.*';
+    case ORDER_CONFIRM = 'order.confirm.*';
 }

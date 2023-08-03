@@ -42,6 +42,8 @@ enum RoleEnum: string
                 PermissionEnum::CART_DELETE->value,
                 PermissionEnum::CART_ADD->value,
                 PermissionEnum::CART_REMOVE->value,
+                PermissionEnum::ORDER_CREATE->value,
+                PermissionEnum::ORDER_CONFIRM->value,
             ]
         ];
     }

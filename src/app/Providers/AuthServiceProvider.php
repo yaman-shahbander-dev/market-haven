@@ -9,6 +9,8 @@ use Domain\Cart\Models\Cart;
 use Domain\Cart\Policies\CartPolicy;
 use Domain\Category\Models\Category;
 use Domain\Category\Policies\CategoryPolicy;
+use Domain\Order\Models\Order;
+use Domain\Order\Policies\OrderPolicy;
 use Domain\Product\Models\Product;
 use Domain\Product\Policies\ProductPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         Brand::class => BrandPolicy::class,
         Product::class => ProductPolicy::class,
         Cart::class => CartPolicy::class,
+        Order::class => OrderPolicy::class,
     ];
 
     /**
