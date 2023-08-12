@@ -7,8 +7,11 @@ use Domain\Order\DataTransferObjects\OrderData;
 use Domain\Order\Models\Order;
 use Domain\Payment\DataTransferObjects\EPaymentData;
 use Domain\Payment\DataTransferObjects\OrderEPaymentData;
+use Domain\Payment\Jobs\CreatedOrderMailJob;
+use Domain\Payment\Mail\OrderCreatedMail;
 use Domain\Payment\Managers\IManagers\IPaymentManager;
 use Domain\Payment\Models\PaymentGateway;
+use Illuminate\Support\Facades\Mail;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Shared\Helpers\ErrorResult;
 
@@ -40,6 +43,8 @@ class CreatePaymentAction
             'gateway_state' => $gatewayPayment->gatewayState,
             'state' => $gatewayPayment->state
         ]));
+
+        CreatedOrderMailJob::dispatch($order)->onQueue('order-creation');
 
         if ($ePaymentData) return OrderEPaymentData::from(['order' => OrderData::from($order), 'e_payment' => $ePaymentData]);
 
