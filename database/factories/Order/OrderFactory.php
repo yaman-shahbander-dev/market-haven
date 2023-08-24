@@ -3,6 +3,7 @@
 namespace Database\Factories\Order;
 
 use Domain\Order\Models\Order;
+use Domain\Order\States\Pending;
 use Domain\Payment\Enums\PaymentGatewayEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Domain\Client\Models\User;
@@ -31,7 +32,7 @@ class OrderFactory extends Factory
             'email' => fake()->email(),
             'payment_gateway' => $this->faker->randomElement(PaymentGatewayEnum::getValues()),
             'price' => $this->faker->numerify('#'),
-            'state' => fake()->word(), // Placed::getMorphClass(),
+            'state' => Pending::getMorphClass(),
             'expired_at' => null,
             'created_at' => now(),
             'updated_at' => now(),

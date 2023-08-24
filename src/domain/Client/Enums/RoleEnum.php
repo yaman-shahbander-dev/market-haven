@@ -31,6 +31,11 @@ enum RoleEnum: string
                 PermissionEnum::PRODUCT_UPDATE->value,
                 PermissionEnum::PRODUCT_DELETE->value,
                 PermissionEnum::CART_VIEW_ANY->value,
+                PermissionEnum::CONTINENT_VIEW_ANY->value,
+                PermissionEnum::COUNTRY_VIEW_ANY->value,
+                PermissionEnum::CITY_VIEW_ANY->value,
+                PermissionEnum::ADDRESS_VIEW_ANY->value,
+                PermissionEnum::ADDRESS_CREATE->value,
             ],
             self::USER->value => [
                 PermissionEnum::USER_VIEW_ANY->value,
@@ -44,6 +49,11 @@ enum RoleEnum: string
                 PermissionEnum::CART_REMOVE->value,
                 PermissionEnum::ORDER_CREATE->value,
                 PermissionEnum::ORDER_CONFIRM->value,
+                PermissionEnum::CONTINENT_VIEW_ANY->value,
+                PermissionEnum::COUNTRY_VIEW_ANY->value,
+                PermissionEnum::CITY_VIEW_ANY->value,
+                PermissionEnum::ADDRESS_VIEW_ANY->value,
+                PermissionEnum::ADDRESS_CREATE->value,
             ]
         ];
     }
