@@ -20,6 +20,7 @@ class GetContinentsAction
     public function handle(): PaginatedDataCollection
     {
         $continents = QueryBuilder::for($this->continent)
+            ->allowedIncludes(['countries'])
             ->paginate();
 
         return ContinentData::collection($continents);

@@ -20,6 +20,7 @@ class GetCountriesAction
     public function handle(): PaginatedDataCollection
     {
         $countries = QueryBuilder::for($this->country)
+            ->allowedIncludes(['cities'])
             ->paginate();
 
         return CountryData::collection($countries);

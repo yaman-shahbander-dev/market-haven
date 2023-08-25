@@ -4,6 +4,7 @@ namespace Domain\Location\Models;
 
 use Database\Factories\Location\ContinentFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 
@@ -25,5 +26,10 @@ class Continent extends Model
     protected static function newFactory(): ContinentFactory
     {
         return ContinentFactory::new();
+    }
+
+    public function countries(): HasMany
+    {
+        return $this->hasMany(Country::class);
     }
 }

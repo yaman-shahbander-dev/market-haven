@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\v1\Http\Location\Resources;
+namespace App\User\v1\Http\Location\Resources;
 
 use App\Helpers\HasPaginatedCollection;
 use Illuminate\Http\Request;

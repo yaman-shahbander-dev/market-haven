@@ -19,6 +19,7 @@ class ShowCountryAction
     public function handle(string $id): CountryData
     {
         $country = QueryBuilder::for($this->country)
+            ->allowedIncludes(['cities'])
             ->where('id', $id)
             ->first();
 

@@ -28,6 +28,9 @@ class CountryResource extends JsonResource
                 'deleted_at' => $this->deletedAt,
             ],
             'relationships' => [
+                'cities' => $this->when($this->cities, function () {
+                    return CityResource::collection($this->cities->items());
+                })
             ]
         ];
     }

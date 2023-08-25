@@ -84,8 +84,8 @@ class RouteServiceProvider extends ServiceProvider
                             Route::prefix(config('route-prefix.user.v1.order', 'order'))
                                 ->group(base_path('routes/user/v1/order.php'));
 
-//                            Route::prefix(config('route-prefix.user.v1.location', 'location')
-//                                ->group(base_path('routes/user/v1/location.php')));
+                            Route::prefix(config('route-prefix.user.v1.location', 'location'))
+                                ->group(base_path('routes/user/v1/location.php'));
                         });
                     });
             });

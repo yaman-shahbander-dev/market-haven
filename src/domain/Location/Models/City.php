@@ -4,6 +4,8 @@ namespace Domain\Location\Models;
 
 use Database\Factories\Location\CityFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 
@@ -27,5 +29,15 @@ class City extends Model
     protected static function newFactory(): CityFactory
     {
         return CityFactory::new();
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
     }
 }

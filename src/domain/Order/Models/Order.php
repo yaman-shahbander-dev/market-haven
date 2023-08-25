@@ -3,10 +3,12 @@
 namespace Domain\Order\Models;
 
 use Database\Factories\Order\OrderFactory;
+use Domain\Location\Models\Address;
 use Domain\Order\States\OrderState;
 use Domain\Payment\DataTransferObjects\OrderEPaymentData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Shared\Traits\Uuid;
 use Domain\Payment\Enums\PaymentGatewayEnum;
@@ -69,5 +71,10 @@ class Order extends Model
         return
             $this->user_id = $data->order->userId &&
             $this->expired_at >= now();
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class);
     }
 }

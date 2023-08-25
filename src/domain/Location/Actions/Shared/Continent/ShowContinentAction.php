@@ -19,6 +19,7 @@ class ShowContinentAction
     public function handle(string $id): ContinentData
     {
         $continent = QueryBuilder::for($this->continent)
+            ->allowedIncludes(['countries'])
             ->where('id', $id)
             ->first();
 
