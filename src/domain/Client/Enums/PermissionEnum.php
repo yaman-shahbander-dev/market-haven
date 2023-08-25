@@ -36,4 +36,13 @@ enum PermissionEnum: string
 
     case ORDER_CREATE = 'order.create.*';
     case ORDER_CONFIRM = 'order.confirm.*';
+
+    case CONTINENT_VIEW_ANY = 'continent.view.*';
+
+    case COUNTRY_VIEW_ANY = 'country.view.*';
+
+    case CITY_VIEW_ANY = 'city.view.*';
+
+    case ADDRESS_VIEW_ANY = 'address.view.*';
+    case ADDRESS_CREATE = 'address.create.*';
 }

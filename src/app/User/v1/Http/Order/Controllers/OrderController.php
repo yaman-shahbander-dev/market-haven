@@ -20,7 +20,7 @@ class OrderController extends Controller
 {
     public function store(CreateOrderRequest $request): JsonResponse
     {
-//        $this->authorize('create', app(Order::class));
+        $this->authorize('create', app(Order::class));
 
         if (CheckUserActiveOrdersAction::run($request->user()->id)) {
             return $this->unauthorizedResponse('You can not create more than one active order');
@@ -43,7 +43,7 @@ class OrderController extends Controller
 
     public function confirm(ConfirmOrderRequest $request): JsonResponse
     {
-//        $this->authorize('confirm', app(Order::class));
+        $this->authorize('confirm', app(Order::class));
 
         $gatewayClientPaymentId = $request->get('gateway_client_payment_id');
         if (Cache::missing($gatewayClientPaymentId)) return $this->failedResponse('Payment not found.');

@@ -10,6 +10,7 @@ return [
             'product' => 'product',
             'cart' => 'cart',
             'order' => 'order',
+            'location' => 'location'
         ],
     ],
     'user' => [
@@ -21,6 +22,7 @@ return [
             'product' => 'product',
             'cart' => 'cart',
             'order' => 'order',
+            'location' => 'location'
         ],
     ],
 ];

@@ -9,6 +9,14 @@ use Domain\Cart\Models\Cart;
 use Domain\Cart\Policies\CartPolicy;
 use Domain\Category\Models\Category;
 use Domain\Category\Policies\CategoryPolicy;
+use Domain\Location\Models\Address;
+use Domain\Location\Models\City;
+use Domain\Location\Models\Continent;
+use Domain\Location\Models\Country;
+use Domain\Location\Policies\AddressPolicy;
+use Domain\Location\Policies\CityPolicy;
+use Domain\Location\Policies\ContinentPolicy;
+use Domain\Location\Policies\CountryPolicy;
 use Domain\Order\Models\Order;
 use Domain\Order\Policies\OrderPolicy;
 use Domain\Product\Models\Product;
@@ -28,6 +36,10 @@ class AuthServiceProvider extends ServiceProvider
         Product::class => ProductPolicy::class,
         Cart::class => CartPolicy::class,
         Order::class => OrderPolicy::class,
+        Continent::class => ContinentPolicy::class,
+        Country::class => CountryPolicy::class,
+        City::class => CityPolicy::class,
+        Address::class => AddressPolicy::class,
     ];
 
     /**

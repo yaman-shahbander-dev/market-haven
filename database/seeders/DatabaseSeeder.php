@@ -12,6 +12,10 @@ use Database\Seeders\Client\PermissionSeeder;
 use Database\Seeders\Client\RolePermissionSeeder;
 use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
+use Database\Seeders\Location\AddressSeeder;
+use Database\Seeders\Location\CitySeeder;
+use Database\Seeders\Location\ContinentSeeder;
+use Database\Seeders\Location\CountrySeeder;
 use Database\Seeders\Order\OrderProductSeeder;
 use Database\Seeders\Order\OrderSeeder;
 use Database\Seeders\Payment\GatewaySeeder;
@@ -57,6 +61,10 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             OrderProductSeeder::class,
             GatewaySeeder::class,
+            ContinentSeeder::class,
+            CountrySeeder::class,
+            CitySeeder::class,
+            AddressSeeder::class,
         ];
 
         /*
