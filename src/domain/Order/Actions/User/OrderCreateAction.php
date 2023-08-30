@@ -51,8 +51,9 @@ class OrderCreateAction
 
         $result1 = UpdateCartQuantityAndPriceAction::run($data);
         $result2 = UpdateProductsAndColorsQuantityAction::run($data);
+        $address = CreateOrderAddressAction::run($data->orderData, $order);
 
-        if(!($result1 && $result2)) return ErrorResult::from([]);
+        if(!($result1 && $result2 && $address)) return ErrorResult::from([]);
 
         return CreatePaymentAction::run($data, $order);
     }

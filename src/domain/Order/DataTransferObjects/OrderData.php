@@ -31,6 +31,9 @@ class OrderData extends BaseData
         public ?Carbon $createdAt,
         public ?Carbon $updatedAt,
         public ?Carbon $deletedAt,
+        public ?string $cityId,
+        public ?string $address,
+        public ?string $postalCode
     ) {
     }
 }
