@@ -41,7 +41,10 @@ class CreateOrderRequest extends FormRequest
                 'min:1',
             ],
             'cart_products.*.id' => ['required', 'uuid', Rule::exists('cart_product', 'id')->withoutTrashed()],
-            'cart_products.*.quantity' => ['required', 'integer']
+            'cart_products.*.quantity' => ['required', 'integer'],
+            'city_id' => ['required', 'integer', Rule::exists('cities', 'id')->withoutTrashed()],
+            'address' => ['required', 'string', 'min:3', 'max:255'],
+            'postal_code' => ['required', 'string', 'min:5', 'max:12'],
         ];
     }
 }
