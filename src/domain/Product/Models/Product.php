@@ -21,12 +21,14 @@ use Illuminate\Support\Facades\DB;
 use Shared\Traits\Uuid;
 use Domain\Product\Models\ProductDetail;
 use \Domain\Product\Models\ProductBrand;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
     use HasFactory;
     use Uuid;
     use SoftDeletes;
+    use Searchable;
 
     protected $table = 'products';
 
@@ -48,6 +50,22 @@ class Product extends Model
     protected static function newFactory(): ProductFactory
     {
         return ProductFactory::new();
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'title' => '',
+            'description' => '',
+            'product_details.price' => '',
+            'product_details.discount' => '',
+            'product_details.quantity' => '',
+            'product_details.available' => '',
+            'product_colors.color' => '',
+            'product_colors.quantity' => '',
+            'brands.name' => '',
+            'categories.name' => ''
+        ];
     }
 
     public function newEloquentBuilder($query): ProductQueryBuilder
