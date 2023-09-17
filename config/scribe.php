@@ -262,7 +262,7 @@ This documentation aims to provide all the information you need to work with our
 - The documentation is generated from the source code.
 - The API is available at <a>{your staging URL}</a>.
 - You can call endpoints using mock server that will provide you with <b>success</b> response : <a>{Your Mock Server URL}</a>
-- 
+-
 - Status code <b>500</b> is used for internal server errors.
 - Status code <b>405</b> is used for wrong method call.
 - Status code <b>401</b> is used for unauthorized requests and can occur in requests that require <b>authentication</b> only.
@@ -282,6 +282,7 @@ INTRO
     'example_languages' => [
         'bash',
         'javascript',
+        'php'
     ],
 
     /*
@@ -333,17 +334,12 @@ INTRO
          * Note: you must include the initial '/' when writing an endpoint.
          */
         'order' => [
-            // 'This group will come first',
-            // 'This group will come next' => [
-            //     'POST /this-endpoint-will-comes-first',
-            //     'GET /this-endpoint-will-comes-next',
-            // ],
-            // 'This group will come third' => [
-            //     'This subgroup will come first' => [
-            //         'GET /this-other-endpoint-will-comes-first',
-            //         'GET /this-other-endpoint-will-comes-next',
-            //     ]
-            // ]
+            'Endpoints' => [
+                'GET /api/user',
+            ],
+            'Admin - Auth' => [
+                'Admin login'
+            ],
         ],
     ],
 
@@ -425,7 +421,8 @@ INTRO
             Strategies\Responses\UseResponseTag::class,
             Strategies\Responses\UseResponseFileTag::class,
             Strategies\Responses\ResponseCalls::class,
-            \App\Helpers\DocStrategies\ApiResponseTags::class,
+            \App\Helpers\DocStrategies\Responses\OkFileTag::class,
+            \App\Helpers\DocStrategies\Responses\OkResponseTag::class,
         ],
         'responseFields' => [
             Strategies\ResponseFields\GetFromResponseFieldAttribute::class,
