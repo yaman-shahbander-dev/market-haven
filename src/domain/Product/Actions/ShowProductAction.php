@@ -22,6 +22,7 @@ class ShowProductAction
     public function handle(string $id): ProductData
     {
         $product = QueryBuilder::for($this->product->productsDetails($id))
+            ->allowedIncludes(['reviews'])
             ->first();
 
         return ProductData::from($product);

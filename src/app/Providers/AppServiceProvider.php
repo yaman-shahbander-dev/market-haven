@@ -66,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
 
         Relation::morphMap([
             MorphEnum::USER->value => \Domain\Client\Models\User::class,
+            MorphEnum::PRODUCT->value => \Domain\Product\Models\Product::class,
         ]);
 
         $this->loadMigrationsFrom([
@@ -77,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Order',
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Payment',
             database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Location',
+            database_path() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . 'Review',
         ]);
 
 

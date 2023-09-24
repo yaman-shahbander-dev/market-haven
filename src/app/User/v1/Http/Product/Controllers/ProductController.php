@@ -2,7 +2,7 @@
 
 namespace App\User\v1\Http\Product\Controllers;
 
-use App\Admin\v1\Http\Product\Resources\ProductResource;
+use App\User\v1\Http\Product\Resources\ProductResource;
 use App\Http\Controllers\Controller;
 use Domain\Product\Actions\GetProductsAction;
 use Domain\Product\Actions\SearchProductsAction;

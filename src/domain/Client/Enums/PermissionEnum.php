@@ -45,4 +45,9 @@ enum PermissionEnum: string
 
     case ADDRESS_VIEW_ANY = 'address.view.*';
     case ADDRESS_CREATE = 'address.create.*';
+
+    case REVIEW_VIEW_ANY = 'review.view.*';
+    case REVIEW_CREATE = 'review.create.*';
+    case REVIEW_DELETE = 'review.delete.*';
+    case REVIEW_APPROVE = 'review.approve.*';
 }

@@ -2,6 +2,7 @@
 
 namespace App\Admin\v1\Http\Product\Resources;
 
+use App\Admin\v1\Http\Review\Resources\ReviewResource;
 use App\Helpers\HasPaginatedCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -30,6 +31,11 @@ class ProductResource extends JsonResource
                 'updated_at' => $this->updatedAt,
                 'deleted_at' => $this->deletedAt,
             ],
+            'relationships' => [
+                'reviews' => $this->when($this->reviews, function () {
+                    return ReviewResource::collection($this->reviews->items());
+                })
+            ]
         ];
     }
 }

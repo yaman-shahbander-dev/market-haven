@@ -23,6 +23,7 @@ class GetProductsAction
     public function handle(): PaginatedDataCollection
     {
         $products = QueryBuilder::for($this->product->productsDetails())
+            ->allowedIncludes(['reviews'])
             ->paginate();
 
         return ProductData::collection($products);
