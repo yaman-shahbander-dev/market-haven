@@ -24,6 +24,7 @@ use Database\Seeders\Product\ProductCategorySeeder;
 use Database\Seeders\Product\ProductColorsSeeder;
 use Database\Seeders\Product\ProductDetailsSeeder;
 use Database\Seeders\Product\ProductSeeder;
+use Database\Seeders\Review\ReviewSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -65,6 +66,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             CitySeeder::class,
             AddressSeeder::class,
+            ReviewSeeder::class,
         ];
 
         /*

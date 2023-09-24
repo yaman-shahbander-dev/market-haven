@@ -58,6 +58,9 @@ class RouteServiceProvider extends ServiceProvider
 
                             Route::prefix(config('route-prefix.admin.v1.location', 'location'))
                                 ->group(base_path('routes/admin/v1/location.php'));
+
+                            Route::prefix(config('route-prefix.admin.v1.review', 'review'))
+                                ->group(base_path('routes/admin/v1/review.php'));
                         });
                     });
 
@@ -86,6 +89,9 @@ class RouteServiceProvider extends ServiceProvider
 
                             Route::prefix(config('route-prefix.user.v1.location', 'location'))
                                 ->group(base_path('routes/user/v1/location.php'));
+
+                            Route::prefix(config('route-prefix.user.v1.review', 'review'))
+                                ->group(base_path('routes/user/v1/review.php'));
                         });
                     });
             });

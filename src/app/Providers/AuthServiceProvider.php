@@ -21,6 +21,8 @@ use Domain\Order\Models\Order;
 use Domain\Order\Policies\OrderPolicy;
 use Domain\Product\Models\Product;
 use Domain\Product\Policies\ProductPolicy;
+use Domain\Review\Models\Review;
+use Domain\Review\Policies\ReviewPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -40,6 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         Country::class => CountryPolicy::class,
         City::class => CityPolicy::class,
         Address::class => AddressPolicy::class,
+        Review::class => ReviewPolicy::class,
     ];
 
     /**

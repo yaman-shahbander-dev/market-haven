@@ -36,6 +36,10 @@ enum RoleEnum: string
                 PermissionEnum::CITY_VIEW_ANY->value,
                 PermissionEnum::ADDRESS_VIEW_ANY->value,
                 PermissionEnum::ADDRESS_CREATE->value,
+                PermissionEnum::REVIEW_VIEW_ANY->value,
+                PermissionEnum::REVIEW_CREATE->value,
+                PermissionEnum::REVIEW_DELETE->value,
+                PermissionEnum::REVIEW_APPROVE->value,
             ],
             self::USER->value => [
                 PermissionEnum::USER_VIEW_ANY->value,
@@ -54,6 +58,7 @@ enum RoleEnum: string
                 PermissionEnum::CITY_VIEW_ANY->value,
                 PermissionEnum::ADDRESS_VIEW_ANY->value,
                 PermissionEnum::ADDRESS_CREATE->value,
+                PermissionEnum::REVIEW_CREATE->value,
             ]
         ];
     }
