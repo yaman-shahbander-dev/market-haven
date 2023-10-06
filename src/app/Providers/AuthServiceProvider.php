@@ -9,6 +9,8 @@ use Domain\Cart\Models\Cart;
 use Domain\Cart\Policies\CartPolicy;
 use Domain\Category\Models\Category;
 use Domain\Category\Policies\CategoryPolicy;
+use Domain\Favorite\Models\Favorite;
+use Domain\Favorite\Policies\FavoritePolicy;
 use Domain\Location\Models\Address;
 use Domain\Location\Models\City;
 use Domain\Location\Models\Continent;
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         City::class => CityPolicy::class,
         Address::class => AddressPolicy::class,
         Review::class => ReviewPolicy::class,
+        Favorite::class => FavoritePolicy::class,
     ];
 
     /**

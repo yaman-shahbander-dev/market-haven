@@ -92,6 +92,9 @@ class RouteServiceProvider extends ServiceProvider
 
                             Route::prefix(config('route-prefix.user.v1.review', 'review'))
                                 ->group(base_path('routes/user/v1/review.php'));
+
+                            Route::prefix(config('route-prefix.user.v1.favorite', 'favorite'))
+                                ->group(base_path('routes/user/v1/favorite.php'));
                         });
                     });
             });

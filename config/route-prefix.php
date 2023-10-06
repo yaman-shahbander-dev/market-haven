@@ -25,6 +25,7 @@ return [
             'order' => 'order',
             'location' => 'location',
             'review' => 'review',
+            'favorite' => 'favorite',
         ],
     ],
 ];

@@ -59,6 +59,8 @@ enum RoleEnum: string
                 PermissionEnum::ADDRESS_VIEW_ANY->value,
                 PermissionEnum::ADDRESS_CREATE->value,
                 PermissionEnum::REVIEW_CREATE->value,
+                PermissionEnum::FAVORITE_VIEW_ANY->value,
+                PermissionEnum::FAVORITE_CREATE->value
             ]
         ];
     }
