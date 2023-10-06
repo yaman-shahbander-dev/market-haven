@@ -50,4 +50,7 @@ enum PermissionEnum: string
     case REVIEW_CREATE = 'review.create.*';
     case REVIEW_DELETE = 'review.delete.*';
     case REVIEW_APPROVE = 'review.approve.*';
+
+    case FAVORITE_VIEW_ANY = 'favorite.view.*';
+    case FAVORITE_CREATE = 'favorite.create.*';
 }

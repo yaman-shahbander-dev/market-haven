@@ -12,6 +12,7 @@ use Database\Seeders\Client\PermissionSeeder;
 use Database\Seeders\Client\RolePermissionSeeder;
 use Database\Seeders\Client\UserPermissionSeeder;
 use Database\Seeders\Client\UserSeeder;
+use Database\Seeders\Favorite\FavoriteSeeder;
 use Database\Seeders\Location\AddressSeeder;
 use Database\Seeders\Location\CitySeeder;
 use Database\Seeders\Location\ContinentSeeder;
@@ -67,6 +68,7 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             AddressSeeder::class,
             ReviewSeeder::class,
+            FavoriteSeeder::class,
         ];
 
         /*
