@@ -31,18 +31,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IPaymentManager::class, PaymentManager::class);
         $this->app->bind(
             CreatePaymentAction::class,
-            // to be changed
-            fn () => new CreatePaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
+            fn () => new CreatePaymentAction(new StripeClient(config('payment.stripe.secret_key')))
         );
         $this->app->bind(
             GetPaymentAction::class,
-            // to be changed
-            fn () => new GetPaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
+            fn () => new GetPaymentAction(new StripeClient(config('payment.stripe.secret_key')))
         );
         $this->app->bind(
             ConfirmPaymentAction::class,
-            // to be changed
-            fn () => new ConfirmPaymentAction(new StripeClient(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA')))
+            fn () => new ConfirmPaymentAction(new StripeClient(config('payment.stripe.secret_key')))
         );
 
         if ($this->app->environment('local')) {

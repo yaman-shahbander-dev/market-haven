@@ -15,8 +15,7 @@ class CreatePaymentAction
 
     public function __construct(protected StripeClient $stripeClient)
     {
-        // to be changed
-        Stripe::setApiKey(config('payment.stripe.secret_key', 'sk_test_51L1rOdH3qVRn63M2RAD1z9kXYZ7HsWjqBkq0uXtR2CbzDSTR7VdMPSJqrCV42f7nc8OevRcjsOxeff006KlblTu200ot5FS4HA'));
+        Stripe::setApiKey(config('payment.stripe.secret_key'));
     }
 
     public function handle(Order $order): Exception|PaymentIntent
@@ -24,7 +23,7 @@ class CreatePaymentAction
         try {
             return $this->stripeClient->paymentIntents->create([
                 'amount' => $order->price,
-                'currency' => 'USD', // to be changed
+                'currency' => 'USD',
                 'payment_method_types' => ['card'],
                 'capture_method' => "manual",
             ]);

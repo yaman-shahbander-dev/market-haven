@@ -39,7 +39,7 @@ class CreatePaymentAction
             'gateway_payment_id' => $gatewayPayment->gatewayPaymentId,
             'gateway_client_payment_id' => $gatewayPayment->gatewayClientPaymentId,
             'value' => $order->price,
-            'currency' => 'USD', // to be changed
+            'currency' => 'USD', 
             'gateway_state' => $gatewayPayment->gatewayState,
             'state' => $gatewayPayment->state
         ]));

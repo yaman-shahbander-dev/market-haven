@@ -17,7 +17,6 @@ class CreatePaymentAction
     {
         try {
             $ordersCreateRequest = new OrdersCreateRequest();
-            // currency to be changed to be dynamic
             $ordersCreateRequest->body = self::buildOrderRequest('USD', $order->price);
             return (self::client())->execute($ordersCreateRequest);
         } catch (Exception $exception) {
