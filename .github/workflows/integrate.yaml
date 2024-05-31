@@ -1,0 +1,175 @@
+name: Laravel Application Workflow
+
+on:
+#  push:
+#    branches:
+#      - main
+#      - master
+#      - dev
+#  pull_request:
+#    branches:
+#      - main
+#      - master
+#      - dev
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        ports:
+          - 3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo, xml, ctype, json, tokenizer, bcmath, gd, exif, zip, mysql
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Run tests
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          DB_USERNAME: ${{ secrets.MYSQL_USER }}
+          DB_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          REDIS_HOST: 127.0.0.1
+          REDIS_PASSWORD: false
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+        run: php artisan test
+
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+          
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push composer image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: composer_base
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-composer:latest
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: frontend
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-frontend:latest
+
+      - name: Build and push fpm image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: fpm_server
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-fpm:latest
+
+      - name: Build and push nginx image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: web_server
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-web_server:latest
+
+      - name: Build and push cron image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: cron
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-cron:latest
+
+      - name: Build and push cli image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: cli
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/haven-cli:latest
+# deploy:
+#   needs: build-and-push
+#   runs-on: ubuntu-latest
+
+#   steps:
+#     - name: Deploy to Production Server
+#       env:
+#         SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+#         SSH_USER: ${{ secrets.PROD_SSH_USER }}
+#         SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+#       run: |
+#         # SSH into the production server
+#         ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<EOF
+          
+#         # Pull the latest changes from the master branch
+#         cd /path/to/laravel/project
+#         git pull origin master
+
+#         # Pull the updated Docker images
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-composer:latest
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-frontend:latest
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-fpm:latest
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-web_server:latest
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-cron:latest
+#         docker pull ${{ secrets.DOCKER_USERNAME }}/haven-cli:latest
+#           
+#         # Restart the Docker containers or services
+#         docker-compose down
+#         docker-compose up -d
+#           
+#         EOF
