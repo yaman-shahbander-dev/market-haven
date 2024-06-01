@@ -1,0 +1,121 @@
+version: '3.8'
+services:
+    laravel.fpm:
+        build:
+            context: .
+            target: fpm_server
+        image: laravel/fpm_server
+        environment:
+            APP_DEBUG: 'true'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - laravel-network
+
+    laravel.web:
+        build:
+            context: .
+            target: web_server
+        image: laravel/web_server
+        ports:
+            - '8080:80'
+        environment:
+            FPM_HOST: 'laravel.fpm:9000'
+        volumes:
+            - './public:/var/www/html/public'
+        networks:
+            - laravel-network
+
+    laravel.cron:
+        build:
+            context: .
+            target: cron
+        image: laravel/cron
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - laravel-network
+            
+    laravel.frontend:
+        build:
+            context: .
+            target: frontend
+        command: ['npm', 'run', 'dev']
+        image: laravel/frontend
+        ports:
+            - '5173:5173'
+        volumes:
+            - '.:/var/www/html'
+            - '/var/www/html/node_modules/'
+        networks:
+            - laravel-network
+
+    composer:
+        build:
+            context: .
+            target: composer_base
+        image: laravel/composer_base
+        volumes:
+            - '.:/var/www/html'
+        networks:
+             - laravel-network
+        entrypoint: ['composer']
+
+    npm:
+        build:
+            context: .
+            target: frontend
+        image: laravel/frontend
+        volumes:
+            - '.:/var/www/html'
+            - '/var/www/html/node_modules/'
+        networks:
+            - laravel-network
+        entrypoint: ['npm']
+
+    artisan:
+        build:
+            context: .
+            target: cli
+        image: laravel/cli
+        volumes:
+            - '.:/var/www/html'
+        networks:
+             - laravel-network
+        entrypoint: ['php', 'artisan']
+
+    mysql:
+        image: 'mysql:latest'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'laravel-mysql:/var/lib/mysql'
+        networks:
+            - laravel-network
+        healthcheck:
+          test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+          retries: 3
+          timeout: 5s
+
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        networks:
+            - laravel-network
+        healthcheck:
+            test: ['CMD', 'redis-cli', 'ping']
+            retries: 3
+            timeout: 5s
+
+volumes:
+    laravel-mysql:
+
+networks:
+    laravel-network:
