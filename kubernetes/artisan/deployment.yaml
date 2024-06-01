@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artisan
+  labels:
+    tier: backend
+    layer: artisan
+  namespace: laravel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      layer: artisan
+  template:
+    metadata:
+      labels:
+        tier: backend
+        layer: artisan
+    spec:
+      containers:
+        - name: artisan
+          image: yamahn/haven-cli:latest
+          command: ["tail", "-f", "/dev/null"] # Keep the pod running
+          envFrom:
+            - configMapRef:
+                name: laravel-app-config
+            - secretRef:
+                name: laravel-app-secret
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: laravel-storage
+      volumes:
+        - name: laravel-storage
+          persistentVolumeClaim:
+            claimName: laravel-pvc

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue-worker-default
+  labels:
+    tier: backend
+    layer: queue-worker
+    queue: default
+  namespace: laravel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      layer: queue-worker
+      queue: default
+  template:
+    metadata:
+      labels:
+        tier: backend
+        layer: queue-worker
+        queue: default
+    spec:
+      containers:
+        - name: queue-worker
+          image: yamahn/haven-cli:latest
+          command:
+            - php
+          args:
+            - artisan
+            - queue:work
+            - --queue=default
+            - --max-jobs=200
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: laravel-app-config
+            - secretRef:
+                name: laravel-app-secret

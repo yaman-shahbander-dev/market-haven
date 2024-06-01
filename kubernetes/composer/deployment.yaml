@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: composer
+  labels:
+    tier: backend
+    layer: composer
+  namespace: laravel-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      layer: composer
+  template:
+    metadata:
+      labels:
+        tier: backend
+        layer: composer
+    spec:
+      containers:
+        - name: artisan
+          image: yamahn/haven-composer:latest
+          command: ["tail", "-f", "/dev/null"]
+          envFrom:
+            - configMapRef:
+                name: laravel-app-config
+            - secretRef:
+                name: laravel-app-secret
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: laravel-storage
+      volumes:
+        - name: laravel-storage
+          persistentVolumeClaim:
+            claimName: laravel-pvc

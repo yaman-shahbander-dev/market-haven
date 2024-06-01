@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: laravel-scheduler
+  namespace: laravel-app
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: scheduler
+              image: yamahn/haven-cli:latest
+              command:
+                - php
+              args:
+                - artisan
+                - schedule:run
+              envFrom:
+                - configMapRef:
+                    name: laravel-app-config
+                - secretRef:
+                    name: laravel-app-secret
+              volumeMounts:
+                - mountPath: /var/www/html
+                  name: laravel-storage
+          volumes:
+            - name: laravel-storage
+              persistentVolumeClaim:
+                claimName: laravel-pvc

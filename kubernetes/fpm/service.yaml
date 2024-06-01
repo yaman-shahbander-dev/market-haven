@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fpm
+  namespace: laravel-app
+spec:
+  selector:
+    tier: backend
+    layer: fpm
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000

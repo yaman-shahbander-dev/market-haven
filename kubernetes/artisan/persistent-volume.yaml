@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: laravel-pv
+  namespace: laravel-app
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /data/laravel
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: laravel-pvc
+  namespace: laravel-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
