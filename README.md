@@ -1,6 +1,9 @@
 <p align="center">
   A <a href="https://laravel.com" target="_blank">Laravel</a> e-commerce project with a Domain-Driven Design (DDD) structure.
 </p>
+<p style="color: lavender">
+<b>Market Haven</b> is an e-commerce platform, featuring a range of products, categories, brands, shopping carts, and seamless payment options. Users can purchase products, mark them as favorites, and provide valuable feedback through reviews.
+</p>
 
 # Requirements
 - PHP ^8.1
